@@ -39,7 +39,7 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center" style="margin-top: -20px; display: none">
+  <div class="preloader flex-column justify-content-center align-items-center" style="margin-top: -20px">
     <img class="animation__shake" src="img/loading_screen.gif" alt="DogeGardeen" height="161">
     <?php echo $lang["loading"]; ?>
   </div>
