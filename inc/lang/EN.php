@@ -176,7 +176,7 @@ $lang["infoFiltered"] = "(filtered _MAX_ from total records)";
 $lang["author"] = "All Dogecoin Community!";
 $lang["generator"] = "You!";
 $lang["loading"] = "Loading...";
-$lang["copyrigh"] = '<strong>Copyright &copy; 2022 <a href="https://what-is-dogecoin.com">What is Dogecoin?</a>.</strong> All rights reserved.';
+$lang["copyrigh"] = 'Doge OpenSource Online Store <a href="https://github.com/qlpqlp/DogeGarden">DogeGarden</a>, powerd by <a href="https://dogecoin.com">Dogecoin</a> BlockChain.';
 $lang["countries"] = '
 <option value="AF">Afghanistan</option>
 <option value="AL">Albania</option>
