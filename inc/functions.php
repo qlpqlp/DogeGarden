@@ -462,7 +462,7 @@ class DogeBridge {
 
 //// orders /////////
   // Add orders
-  public function InsertOrder($id_shibe,$doge_in_address,$doge_out_address,$tax,$total_doge,$doge_transaction_id,$confirmations,$date,$shipping_json,$products_json,$status)
+  public function InsertOrder($id_shibe,$doge_in_address,$doge_out_address,$tax,$total_doge,$doge_transaction_id,$confirmations,$date,$shipping,$products_json,$status)
     {
 
       $this->pdo->query("INSERT INTO `orders` (
@@ -475,7 +475,7 @@ class DogeBridge {
       `confirmations`,
       `date`,
       `status`,
-      `shipping_json`,
+      `shipping`,
       `products_json`
       ) VALUES (
       '".$id_shibe."',
@@ -487,7 +487,7 @@ class DogeBridge {
       '".$confirmations."',
       '".$date."',
       '".$status."',
-      '".$shipping_json."',
+      '".$shipping."',
       '".filter_var($products_json, FILTER_SANITIZE_STRING)."'
       );");
 
@@ -495,7 +495,7 @@ class DogeBridge {
     }
 
   // update an existent orders
-  public function UpdateOrder($id_shibe,$doge_in_address,$doge_out_address,$tax,$total_doge,$doge_transaction_id,$confirmations,$date,$status,$shipping_json,$products_json,$id)
+  public function UpdateOrder($id_shibe,$doge_in_address,$doge_out_address,$tax,$total_doge,$doge_transaction_id,$confirmations,$date,$status,$shipping,$products_json,$id)
     {
 
       $this->pdo->query("UPDATE orders SET
@@ -508,7 +508,7 @@ class DogeBridge {
       confirmations = '".$confirmations."',
       date = '".$date."',
       status = '".$status."',
-      shipping_json = '".$shipping_json."',
+      shipping = '".$shipping."',
       products_json = '".filter_var($products_json, FILTER_SANITIZE_STRING)."'
       WHERE id = '".$id."' limit 1");
 

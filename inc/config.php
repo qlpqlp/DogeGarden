@@ -7,31 +7,32 @@
 */
 
 session_start();
-    //ini_set('display_errors', 1);
+//ini_set('display_errors', 1);
 
     // Add your Data Base credentials here!
     $config["dbhost"] = "localhost";  // put here you database adress
-    $config["dbname"] = "XXXXX"; // your DB name
-    $config["dbuser"] = "XXXXX"; // your DB username
-    $config["dbpass"] = "XXXXX"; // your DB password
+    $config["dbname"] = "XXX"; // your DB name
+    $config["dbuser"] = "XXX"; // your DB username
+    $config["dbpass"] = "XXX"; // your DB password
 
-    $config["mail_name_from"] = "XXXXX"; //name to show on all emails sent
-    $config["email_from"] = "XXXXX"; // email to show and reply on all emails sent
+    $config["mail_name_from"] = "XXX"; //name to show on all emails sent
+    $config["email_from"] = "XXX"; // email to show and reply on all emails sent
 
     $config["admin_user"] = "wow"; // your admin user
     $config["admin_pass"] = "dogecoin"; // your admin password
 
+    $config["demo"] = 0; // to active demo mode change to 1, or 0 to disable
     $lang["default"] = "EN"; // Default Language
 
     // Add your Dogecoin Core Node credentials here!
-    $config["rpcuser"] = "XXXXX";
-    $config["rpcpassword"] = "XXXXX";
+    $config["rpcuser"] = "XXX";
+    $config["rpcpassword"] = "XXX";
     $config["dogecoinCoreProtocol"] = "http://";
-    $config["dogecoinCoreServer"] = "XXXXX";
-    //$config["dogecoinCoreServerPort"] = 44555; //testnet
-     $config["dogecoinCoreServerPort"] = 22555; //mainnet
+    $config["dogecoinCoreServer"] = "XXX";
+    $config["dogecoinCoreServerPort"] = 44555; //testnet
+    // $config["dogecoinCoreServerPort"] = 22555; //mainnet
     // DANGER |||| DANGER |||| DANGER |||| DANGER
-    //$config["UnlockDogecoinWalletPassword"] = "XXXXX"; // only used to actually send $DOGE, if you have your Dogecoin Core Wallet Encrypted like you should have :)
+    $config["UnlockDogecoinWalletPassword"] = "XXX"; // only used to actually send $DOGE, if you have your Dogecoin Core Wallet Encrypted like you should have :)
     // DANGER |||| DANGER |||| DANGER |||| DANGER
 
     define('ROOTPATH', __DIR__);

@@ -19,7 +19,7 @@ if(isset($_POST["action"])){
         $d->InsertOrder($_POST["shibe"],0,0,$_POST["tax"],$_POST["total_doge"],0,0,date("Y-m-d H:i:s"),$_POST["shipping"],$_POST["products_json"],0);
     }
     if ( $_GET["do"] == "update"){
-        $d->UpdateOrder($_POST["id_shibe"],$_POST["doge_in_address"],$_POST["doge_out_address"],$_POST["tax"],$_POST["total_doge"],$_POST["doge_transaction_id"],$_POST["confirmations"],$_POST["date"],$_POST["status"],$_POST["shipping_json"],$_POST["products_json"],$_POST["id"]);
+        $d->UpdateOrder($_POST["id_shibe"],$_POST["doge_in_address"],$_POST["doge_out_address"],$_POST["tax"],$_POST["total_doge"],$_POST["doge_transaction_id"],$_POST["confirmations"],$_POST["date"],$_POST["status"],$_POST["shipping"],$_POST["products_json"],$_POST["id"]);
     };
     $_GET["id"] = null; $_GET["do"] = null; $_GET["action"] = null;
 };
@@ -102,7 +102,7 @@ if(isset($_POST["action"])){
                  <div class="col-sm-4">
                       <div class="form-group">
                         <label><?php echo $lang["shipping"]; ?></label>
-                        <input type="number" min="0" step="any" name="shipping_json" class="form-control" value="<?php if (isset($row["shipping_json"])){ echo $row["shipping_json"]; }; ?>" placeholder="">
+                        <input type="number" min="0" step="any" name="shipping" class="form-control" value="<?php if (isset($row["shipping"])){ echo $row["shipping"]; }; ?>" placeholder="">
                       </div>
                   </div>
                     <div class="col-sm-4">

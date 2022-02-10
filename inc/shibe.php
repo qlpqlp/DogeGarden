@@ -2,7 +2,6 @@
 // we check if there is a variable defined
 if(isset($_GET["do"])){
 
-
       // we verify and login the Sibe
       if ($_GET["do"] == "login" and isset($_POST["email"]) and isset($_POST["password"])){
                       $row = $pdo->query("SELECT id FROM shibes where email = '".$d->CleanEmail($_POST["email"])."' and password = '".hash('sha256', $_POST["password"])."' and active = 1 limit 1")->fetch();
@@ -14,7 +13,14 @@ if(isset($_GET["do"])){
     </script>
 <?php
                       }
-      };
+      }else{
+// if the account is not activated we redirect to main page
+?>
+    <script>
+            window.location.href = "//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>";
+    </script>
+<?php
+    };
       // we logout the shib
       if ( $_GET["do"] == "logout"){
             $_SESSION["shibe"] = NULL;
@@ -152,4 +158,5 @@ if(isset($_POST["action"])){
 <?php
     };
 };
+
 ?>

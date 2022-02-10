@@ -23,11 +23,13 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
   <meta name="generator" content="<?php echo $lang["generator"]; ?>">
   <link href="img/logo_dg.png" rel="icon" />
 
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="inc/vendors/AdminLTE/plugins/fontawesome-free/css/all.min.css">
-  <!-- flag-icon-css -->
   <link rel="stylesheet" href="inc/vendors/AdminLTE/plugins/flag-icon-css/css/flag-icon.min.css">
-  <!-- Theme style -->
+  <link rel="stylesheet" href="inc/vendors/AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="inc/vendors/AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="inc/vendors/AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="inc/vendors/AdminLTE/plugins/summernote/summernote-bs4.min.css">
+    <!-- Theme style -->
   <link rel="stylesheet" href="inc/vendors/AdminLTE/dist/css/adminlte.css">
   <style type="text/css">
     .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
@@ -39,7 +41,7 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center" style="margin-top: -20px">
+  <div class="preloader flex-column justify-content-center align-items-center" style="margin-top: -20px;">
     <img class="animation__shake" src="img/loading_screen.gif" alt="DogeGardeen" height="161">
     <?php echo $lang["loading"]; ?>
   </div>
@@ -145,11 +147,16 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
+   <!-- Brand Logo -->
     <a href="index.php" class="brand-link" style="">
       <img src="img/logo_dgg.png" alt="DogeGarden" style="max-width: 50px">
       <span class="brand-text font-weight-light"><?php echo $lang["store_logo"]; ?></span>
-      <span class="brand-text font-weight-light" style="font-size: 10px"><?php echo $lang["store_slogan"]; ?></span>
+<?php if ($config["demo"] == 1){ ?>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="padding-top:-10px">
+        Demo!
+      </span>
+<?php }; ?>
+      <!-- <span class="brand-text font-weight-light" style="font-size: 10px"><?php echo $lang["store_slogan"]; ?></span> -->
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -404,11 +411,47 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
 <script src="inc/vendors/AdminLTE/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="inc/vendors/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="inc/vendors/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="inc/vendors/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="inc/vendors/AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="inc/vendors/AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="inc/vendors/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="inc/vendors/AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="inc/vendors/AdminLTE/plugins/jszip/jszip.min.js"></script>
+<script src="inc/vendors/AdminLTE/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="inc/vendors/AdminLTE/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="inc/vendors/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="inc/vendors/AdminLTE/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="inc/vendors/AdminLTE/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Summernote -->
+<script src="inc/vendors/AdminLTE/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- AdminLTE App -->
 <script src="inc/vendors/AdminLTE/dist/js/adminlte.min.js"></script>
 <script>
 $(document).ready(function(){
+	$("#tabled").DataTable({
+        "language": {
+            "paginate": {
+              "previous": "<?php echo $lang["previous"];?>",
+              "next": "<?php echo $lang["next"];?>"
+            },
+            "lengthMenu": "<?php echo $lang["lengthMenu"];?>",
+            "zeroRecords": "<?php echo $lang["zeroRecords"];?>",
+            "info": "<?php echo $lang["data_info"];?>",
+            "infoEmpty": "<?php echo $lang["infoEmpty"];?>",
+            "infoFiltered": "<?php echo $lang["infoFiltered"];?>"
+        },
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["csv", "pdf", "print"],
+      "order": [[ 0, "desc" ]],
+    }).buttons().container().appendTo('#tabled_wrapper .col-md-6:eq(0)');
+
+    // Summernote
+    $('#summernote').summernote();
+
+	
     // we get the cart contents and inject the code on the right sidebar
     $("#cartright").load("inc/ajax-cart.php");
 

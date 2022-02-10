@@ -103,6 +103,11 @@ if (!isset($_SESSION["admin"])){
     <a href="wow.php" class="brand-link" style="">
       <img src="../img/logo_dgg.png" alt="DogeGarden" style="max-width: 50px">
       <span class="brand-text font-weight-light"><?php echo $lang["admin_logo"]; ?></span>
+<?php if ($config["demo"] == 1){ ?>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="margin-left:-50px;margin-top:-10px">
+        Demo!
+      </span>
+<?php }; ?>
     </a>
 
     <!-- Sidebar -->
@@ -301,7 +306,7 @@ if (!isset($_SESSION["admin"])){
     // Summernote
     $('#summernote').summernote();
 
-    $('.remove').on('click', function(e){
+    $("#tabled").on('click','.remove', function (e) {
         e.preventDefault();
         var href = $(this).attr('href');
         return swal.fire({

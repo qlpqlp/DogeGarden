@@ -2,7 +2,7 @@
 // include the configuration and functions
 include("../inc/config.php");
 if (isset($_SESSION["admin"])){
-  header('Location: https://'.$_SERVER['HTTP_HOST'].'/LaB/admin/wow.php');
+  header('Location: https://'.$_SERVER['HTTP_HOST'].'/admin/wow.php');
   exit;
 };
 ?>
@@ -66,6 +66,11 @@ if (isset($_SESSION["admin"])){
             <i class="flag-icon flag-icon-pt mr-2"></i> Português
           </a>
         </div>
+<?php if ($config["demo"] == 1){ ?>
+      <span class="top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 15px; margin: 0px">
+        Demo!
+      </span>
+<?php }; ?>
       </li>
     </ul>
   </div>

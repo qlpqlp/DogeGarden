@@ -50,7 +50,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3><?php echo count($pdo->query("SELECT * FROM cart")->fetchAll()); ?></h3>
+                <h3><?php echo count($pdo->query("SELECT * FROM cart where id_shibe > 0")->fetchAll()); ?></h3>
 
                 <p><?php echo $lang["admin_pending_cart"]; ?></p>
               </div>

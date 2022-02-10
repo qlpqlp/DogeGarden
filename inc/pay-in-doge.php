@@ -65,15 +65,15 @@ exit();
 ?>
 <?php if ($cartqty > 0){ // if cart not empty
     if (isset($_SESSION["country"])){ // we checj if Shibe is logged in and we get only shipping from all countries or his own country
-        $db = $pdo->query("SELECT doge FROM shipping where weight >= '".$cartweight."' and country = '' or country = '".$_SESSION["country"]."' order by weight ASC limit 1")->fetch();
+        $shipping = $pdo->query("SELECT doge FROM shipping where weight >= '".$cartweight."' and country = '' or country = '".$_SESSION["country"]."' order by weight ASC limit 1")->fetch();
     }else{
-        $db = $pdo->query("SELECT doge FROM shipping where weight >= '".$cartweight."' order by weight ASC limit 1")->fetch();
+        $shipping = $pdo->query("SELECT doge FROM shipping where weight >= '".$cartweight."' order by weight ASC limit 1")->fetch();
     }
-    if (!isset($db["doge"])){ $db["doge"] = 0; };
+    if (!isset($shipping["doge"])){ $shipping["doge"] = 0; };
 
-      $total_doge = number_format((float)(($carttotal + $db["doge"])), 8, '.', '');
+      $total_doge = number_format((float)(($carttotal + $shipping["doge"])), 8, '.', '');
 
-      $d->InsertOrder($_SESSION["shibe"],0,0,$carttotaltax,$total_doge,0,0,date("Y-m-d H:i:s"),$db["doge"],json_encode($products_json),0);
+      $d->InsertOrder($_SESSION["shibe"],0,0,$carttotaltax,$total_doge,0,0,date("Y-m-d H:i:s"),$shipping["doge"],json_encode($products_json),0);
       $order = $pdo->query("SELECT * FROM orders order by id DESC limit 1")->fetch();
 
       $doge_in_address = $DogePHPbridgeCommand->getnewaddress("DogeGarden->".$_SESSION["shibe"]."->".$order["id"]."->".time());

@@ -56,10 +56,10 @@ CREATE TABLE `orders` (
   `doge_in_address` varchar(255) DEFAULT NULL,
   `doge_out_address` varchar(255) DEFAULT NULL,
   `tax` decimal(10,2) DEFAULT NULL,
-  `total_doge` decimal(10,8) DEFAULT NULL,
+  `total_doge` decimal(20,8) DEFAULT NULL,
   `doge_transaction_id` text,
   `confirmations` int(11) NOT NULL DEFAULT '0',
-  `shipping_json` text,
+  `shipping` decimal(10,2) DEFAULT NULL,
   `products_json` longtext,
   `status` int(1) NOT NULL,
   `email_sent` int(1) NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_cat` int(11) NOT NULL,
   `tax` decimal(10,2) NOT NULL,
-  `doge` decimal(10,8) NOT NULL,
+  `doge` decimal(20,8) NOT NULL,
   `moon_new` decimal(10,2) DEFAULT '0.00',
   `moon_full` decimal(10,2) DEFAULT NULL,
   `qty` int(11) DEFAULT '0',
@@ -129,10 +129,10 @@ CREATE TABLE `shipping` (
   `title` varchar(255) DEFAULT NULL,
   `text` varchar(255) DEFAULT NULL,
   `weight` decimal(10,2) DEFAULT NULL,
-  `doge` decimal(10,8) DEFAULT NULL,
+  `doge` decimal(20,8) DEFAULT NULL,
   `active` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
--- 2022-02-09 01:25:09
+-- 2022-02-10 14:59:18
