@@ -8,6 +8,16 @@ if (!isset($_SESSION["shibe"])){
 <?php
 exit();
 };
+
+// we check if the Dogecoin Node is working before generating the order and payment details
+if ($DogePHPbridgeCommand->getconnectioncount() == "" and $DogePHPbridgeCommand->getconnectioncount() < 1){
+?>
+    <script>
+            window.location.href = "//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>?d=error";
+    </script>
+<?php
+exit();
+}
 ?>
 <div class="card">
               <div class="card-header">

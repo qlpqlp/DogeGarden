@@ -15,22 +15,22 @@ session_start();
     $config["dbuser"] = "XXX"; // your DB username
     $config["dbpass"] = "XXX"; // your DB password
 
-    $config["mail_name_from"] = "XXX"; //name to show on all emails sent
+    $config["mail_name_from"] = "DogeGarden"; //name to show on all emails sent
     $config["email_from"] = "XXX"; // email to show and reply on all emails sent
 
-    $config["admin_user"] = "wow"; // your admin user
-    $config["admin_pass"] = "dogecoin"; // your admin password
+    $config["admin_user"] = "XXX"; // your admin user
+    $config["admin_pass"] = "XXX"; // your admin password
 
     $config["demo"] = 0; // to active demo mode change to 1, or 0 to disable
+    $config["fiat"] = "usd"; // to active fiat option convertion insert and fiat currency eur/usd/jpy
     $lang["default"] = "EN"; // Default Language
 
     // Add your Dogecoin Core Node credentials here!
     $config["rpcuser"] = "XXX";
     $config["rpcpassword"] = "XXX";
-    $config["dogecoinCoreProtocol"] = "http://";
     $config["dogecoinCoreServer"] = "XXX";
-    $config["dogecoinCoreServerPort"] = 44555; //testnet
-    // $config["dogecoinCoreServerPort"] = 22555; //mainnet
+    //$config["dogecoinCoreServerPort"] = 44555; //testnet
+    $config["dogecoinCoreServerPort"] = 22555; //mainnet
     // DANGER |||| DANGER |||| DANGER |||| DANGER
     $config["UnlockDogecoinWalletPassword"] = "XXX"; // only used to actually send $DOGE, if you have your Dogecoin Core Wallet Encrypted like you should have :)
     // DANGER |||| DANGER |||| DANGER |||| DANGER

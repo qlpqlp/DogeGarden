@@ -329,6 +329,7 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
                   };
                   ?>
 
+
         </ul>
 
 
@@ -336,6 +337,15 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
       </nav>
       <!-- /.sidebar-menu -->
     </div>
+    <?php if (isset($config["fiat"]) and $config["fiat"] != ""){ ?>
+        <span class="brand-text font-weight-light">
+          <div style="color: #666666; padding: 10px; position: absolute; bottom: 20px;" id="fiat">
+          1 &ETH; = <?php echo $d->DogeFiatRates($config["fiat"]); ?> <?php echo strtoupper($config["fiat"]);?><br>
+          1 <?php echo strtoupper($config["fiat"]);?> = <?php echo $d->FiatDogeRates("1.00", $config["fiat"]); ?> &ETH;
+          </div>
+        </span>
+  <?php };?>
+
     <!-- /.sidebar -->
   </aside>
 
@@ -489,6 +499,18 @@ $(document).ready(function(){
                     confirmButtonColor: '#666666',
                     html:
                       '<?php echo $lang["verify_account"]; ?>',
+                  })
+<?php }; ?>
+// wen we verify that the Dogecoin Node is not running!
+<?php if (isset($_GET["d"]) and $_GET["d"] == "error"){ ?>
+                  swal.fire({
+                    icon: 'warning',
+                    title: '<?php echo $lang["sad"]; ?>',
+                    showConfirmButton: true,
+                    confirmButtonColor: '#666666',
+                    html:
+                      '<img src="img/sad_doge.gif"><br><br>' +
+                      '<?php echo $lang["error_node"]; ?>',
                   })
 <?php }; ?>
 // wen we a shibe is registered

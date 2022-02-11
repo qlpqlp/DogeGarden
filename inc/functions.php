@@ -11,9 +11,9 @@
         exit();
      };
 
-         // Include the Dogecoin Core Bridge
-    require_once ROOTPATH.'/vendors/jsonRPCClient.php';
-    $DogePHPbridgeCommand = new jsonRPCClient($config["dogecoinCoreProtocol"].$config["rpcuser"].':'.$config["rpcpassword"].'@'.$config["dogecoinCoreServer"].':'.$config["dogecoinCoreServerPort"]);
+    // Include the Dogecoin Core Bridge
+    require_once ROOTPATH.'/vendors/dogecoinRPCBridge.php';
+    $DogePHPbridgeCommand = new DogecoinRpc($config["rpcuser"], $config["rpcpassword"], $config["dogecoinCoreServer"], $config["dogecoinCoreServerPort"]);
 
     // Add the PDO DB Connection
     $db = 'mysql:host='.$config["dbhost"].';dbname='.$config["dbname"];
@@ -692,6 +692,37 @@ class DogeBridge {
         // Send mail
         mail($email_to, $mail_subject, $mail_message, $headers);
       }
+
+    // This functions is to get the visitor real IP
+    public function getIPAddress() {
+     //whether ip is from the share internet
+      if(!empty($_SERVER['HTTP_CLIENT_IP'])) {
+          $ip = $_SERVER['HTTP_CLIENT_IP'];
+      }
+      //whether ip is from the proxy
+      elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+          $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+       }
+      //whether ip is from the remote address
+      else{
+          $ip = $_SERVER['REMOTE_ADDR'];
+      }
+       return $ip;
+    }
+
+    // This function converts 1 Doge to Fiat
+  public function DogeFiatRates($fiat = "usd") {
+
+        $price = json_decode(file_get_contents("https://api.coingecko.com/api/v3/coins/markets?vs_currency=".$fiat."&ids=dogecoin&per_page=1&page=1&sparkline=false"));
+        return $price[0]->current_price;
+  }
+
+    // This function converts current Fiat to Doge
+  public function FiatDogeRates($price = 0, $fiat = "usd") {
+        $price = $price / $this->DogeFiatRates($fiat = "usd");
+        return $price;
+  }
+
 
 };
 
