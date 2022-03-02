@@ -111,6 +111,8 @@ $lang["correct_amount"] = "Tem que efectuar o pagamento do montante correto em D
 
 $lang["password_recover"] = "Recuperar Password!";
 
+$lang["error_node"] = "Muita desculpa! Há um problema e estamos a tentar resolver. Tente mais tarde. Muito Obrigado!";
+
 $lang["shibes_insert_title"] = "Registar Shibe";
 
 $lang["confirm"] = "Wof, sim!";

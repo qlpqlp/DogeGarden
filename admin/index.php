@@ -2,7 +2,7 @@
 // include the configuration and functions
 include("../inc/config.php");
 if (isset($_SESSION["admin"])){
-  header('Location: https://'.$_SERVER['HTTP_HOST'].'/demo/admin/wow.php');
+  header('Location: https://'.$_SERVER['HTTP_HOST'].'/admin/wow.php');
   exit;
 };
 ?>

@@ -121,6 +121,8 @@ The payment will be checked in background automaticly.<br>
 After 3 verifications the payment status will change to verifyed and you will recive an email to notify you.<br>
 You will have 1 day to make the payment, after that the order will be canceled.";
 
+$lang["error_node"] = "Much sorry! There is a problem and we are fixing it! Try again later. Much Thanks!";
+
 $lang["password_recover"] = "Recover Password!";
 
 $lang["shibes_insert_title"] = "Shibe Register";

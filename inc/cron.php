@@ -11,7 +11,8 @@ include("config.php");
 if ($row["doge_in_address"] != "0"){ // if there is any error on creating a Doge Address we allow to continue
 if ($row["confirmations"] < 3){ // we check all orders below 2 confirmations
 
-    $confirmation = $DogePHPbridgeCommand->listunspent(1,999999,[$row["doge_in_address"]]); // we get all unpent transactions recived to check if the Shibe have payed
+    $confirmation = $DogePHPbridgeCommand->listunspent(-1,999999,[$row["doge_in_address"]]); // we get all unpent transactions recived to check if the Shibe have payed
+
 
 if (isset($confirmation[0]["amount"]) and $row["total_doge"] == $confirmation[0]["amount"]){ // we check if the amount od Doge recived is correct
 

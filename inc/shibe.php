@@ -15,11 +15,13 @@ if(isset($_GET["do"])){
                       }
       }else{
 // if the account is not activated we redirect to main page
+        if ( $_GET["do"] == "logout"){
 ?>
-    <script>
-            window.location.href = "//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>";
-    </script>
+          <script>
+                  window.location.href = "//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>";
+          </script>
 <?php
+        };
     };
       // we logout the shib
       if ( $_GET["do"] == "logout"){

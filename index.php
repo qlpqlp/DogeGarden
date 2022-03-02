@@ -574,6 +574,7 @@ function insertcart(id, qty) {
                     html:
                       '<img src="img/loading_screen.gif">',
                   });
+  $('#cartright').ControlSidebar('toggle');                  
 
 };
 
