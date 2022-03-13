@@ -28,7 +28,7 @@ session_start();
     // Add your Dogecoin Core Node credentials here!
     $config["rpcuser"] = "";
     $config["rpcpassword"] = "";
-    $config["dogecoinCoreServer"] = "q";
+    $config["dogecoinCoreServer"] = "";
     //$config["dogecoinCoreServerPort"] = 44555; //testnet
     $config["dogecoinCoreServerPort"] = 22555; //mainnet
     // DANGER |||| DANGER |||| DANGER |||| DANGER
