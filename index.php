@@ -561,6 +561,22 @@ $d->ActivateShibe($_GET["hash"],$_GET["email"]);
                       '<img src="img/loading_screen.gif">',
                   })
 <?php }; ?>
+// wen we recover a shibe password
+<?php if (isset($_GET["shibe"]) and $_GET["shibe"] == "recover"){
+if (isset($_GET["hash"]) and isset($_GET["email"])){
+    $d->RecoverShibe($_GET["hash"],$_GET["email"]);
+};
+
+ ?>
+                  swal.fire({
+                    icon: 'success',
+                    title: 'Much check your email!',
+                    showConfirmButton: true,
+                    confirmButtonColor: '#666666',
+                    html:
+                      '<img src="img/loading_screen.gif">',
+                  })
+<?php }; ?>
 });
 // wen we click on Buy a product it adds to your cart
 function insertcart(id, qty) {

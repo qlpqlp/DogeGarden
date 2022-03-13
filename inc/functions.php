@@ -30,8 +30,10 @@
 class DogeBridge {
 
     private $pdo;     // include PDO connections
-    public function __construct($pdo) {
+    private $config;     // include PDO connections
+    public function __construct($pdo,$config) {
         $this->pdo = $pdo;
+        $this->config = $config;
     }
 
 //// Pages /////////
@@ -397,6 +399,36 @@ class DogeBridge {
       return null;
     }
 
+  // recover an existent Shibe
+  public function RecoverShibe($hash,$email)
+    {
+        // we verify if the Shibe email alredy exists
+        $row = $this->pdo->query("SELECT id,name,email,password FROM shibes where email = '".$this->CleanEmail($email)."' limit 1")->fetch();
+
+        if (isset($row["password"])){
+
+        $password_verify = hash('sha256', $row["password"]); // doble hash for security, the password the verify against the original
+
+          if ($password_verify == $hash){ // we check if the doble hashed password is the same has on the email link
+
+          $password_email = bin2hex(random_bytes(10)); // we randomly generate a new password
+          $password = hash('sha256', $password_email); // we hash in sha256
+
+        // we update the Shibe password
+          $this->pdo->query("UPDATE shibes SET
+          password = '".$password."'
+          WHERE email = '".$this->CleanEmail($email)."' limit 1");
+
+        // we send the email to the shibe with the new password
+          $mail_subject = "Much recover Shibe Password!";
+          $mail_message = "Hello ".$row["name"].",<br><br>Here it is you new generated password: ".$password_email." <br><br>https://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']."?d=login<br><br>Much Thanks!";
+          $this->SendEmail($this->config["mail_name_from"],$this->config["email_from"],$this->CleanEmail($row["email"]),$mail_subject,$mail_message);
+
+          }
+        }
+      return null;
+    }
+
   // Reemoves Product
   public function RemoveShibe($id)
     {
@@ -726,7 +758,7 @@ class DogeBridge {
 
 };
 
-    $d = new DogeBridge($pdo);
+    $d = new DogeBridge($pdo,$config);
 
 
 

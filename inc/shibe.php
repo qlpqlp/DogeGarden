@@ -12,6 +12,13 @@ if(isset($_GET["do"])){
             window.location.href = "//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>?shibe=login";
     </script>
 <?php
+                      }else{
+// if the login is not valid we redirect to main page                        
+?>
+          <script>
+                  window.location.href = "//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>";
+          </script>
+<?php
                       }
       }else{
 // if the account is not activated we redirect to main page
@@ -21,7 +28,7 @@ if(isset($_GET["do"])){
                   window.location.href = "//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>";
           </script>
 <?php
-        };
+        }
     };
       // we logout the shib
       if ( $_GET["do"] == "logout"){
