@@ -13,7 +13,7 @@ if(isset($_GET["do"])){
     </script>
 <?php
                       }else{
-// if the login is not valid we redirect to main page                        
+// if the login is not valid we redirect to main page
 ?>
           <script>
                   window.location.href = "//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>";
@@ -66,7 +66,12 @@ if(isset($_POST["action"])){
         };
     }
     if ( $_GET["do"] == "update" and iseet($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
-        $d->UpdateShibe($d->CleanString($_POST["name"]),$d->CleanEmail($_POST["email"]),$_POST["password"],$d->CleanString($_POST["tax_id"]),$d->CleanString($_POST["address"]),$d->CleanString($_POST["postal_code"]),$d->CleanString($_POST["country"]),$d->CleanString($_POST["city"]),$d->CleanString($_POST["phone"]),$d->CleanString($_POST["doge_address"]),$d->CleanString($_POST["active"]),date("Y-m-d H:i:s"),$_POST["id"]);
+
+        // we verify if the Shibe email alredy exists
+        $exists = $pdo->query("SELECT id FROM shibes where id <> '".$_SESSION["shibe"]."' and (email = '".$d->CleanEmail($_POST["email"])."')) limit 1")->fetch();
+        if (!isset($exists["id"])){
+            $d->UpdateShibe($d->CleanString($_POST["name"]),$d->CleanEmail($_POST["email"]),$_POST["password"],$d->CleanString($_POST["tax_id"]),$d->CleanString($_POST["address"]),$d->CleanString($_POST["postal_code"]),$d->CleanString($_POST["country"]),$d->CleanString($_POST["city"]),$d->CleanString($_POST["phone"]),$d->CleanString($_POST["doge_address"]),$d->CleanString($_POST["active"]),date("Y-m-d H:i:s"),$_SESSION["shibe"]);
+        };
     };
 
     $_GET["id"] = null; $_GET["do"] = null; $_GET["action"] = null;
@@ -92,7 +97,6 @@ if(isset($_POST["action"])){
               <div class="card-body">
                 <form method="post" action="?d=<?php echo $_GET["d"]; ?>&do=<?php echo $_GET["do"]; ?>">
                   <input type="hidden" name="action" value="save" />
-                  <?php if (isset($_GET["id"])){ ?><input type="hidden" name="id" value="<?php echo $_GET["id"];?>" /><?php }; ?>
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="form-group">
