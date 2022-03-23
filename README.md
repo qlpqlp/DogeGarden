@@ -7,7 +7,7 @@ DogeGarden
 
 ## How to Install 💻
 
-1- Get an Hosting Account or Web Server that supports ```PHP (V. 7 =>)``` + ```MySQL/MariaDB``` (also works locally with Docker or Xampp for exemple)
+1- Get an Hosting Account or Web Server that supports ```PHP (V. 7.3 =>)``` + ```MySQL/MariaDB``` (also works locally with Docker or Xampp for exemple)
 
 2- Create an Data Base and import the file ```dogegarden.sql```
 
@@ -17,7 +17,7 @@ DogeGarden
 
 5- Upload all files (excluding dogegarden.sql and readme.md) to your Hosting Account.
 
-6- Add a cron task to the file cron.php, and let it run every minute and enjoy it :)
+6- Add a cron task to the file ```inc/cron.php```, and let it run every minute and enjoy it :)
 
 ###Notes:
 - This is a Beta Version so is best for now only use on DogeCoin Core Wallet on TestNet untill more people test it and see if everything is ok :)
