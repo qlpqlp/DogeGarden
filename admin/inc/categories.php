@@ -83,6 +83,7 @@ if(isset($_POST["action"])){
                         <select class="form-control" name="id_cat">
                         <?php
                             $dbsub = $pdo->query("SELECT * FROM categories");
+                            if(isset($_GET["id"])){ $dbsub = $pdo->query("SELECT * FROM categories where id <> ".$_GET["id"]); };                            
                             while ($rowsub = $dbsub->fetch()) {
                         ?>
                                 <option value="<?php echo  $rowsub["id"];?>" ><?php echo $rowsub["lang"]."->".$rowsub["title"];?></option>
@@ -103,6 +104,7 @@ if(isset($_POST["action"])){
                           <?php
                         }
                         ?>
+                                <option value="0" selected="selected" >---</option>
                         </select>
                       </div>
                     </div>

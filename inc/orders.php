@@ -25,6 +25,7 @@ if(isset($_GET["do"])){
       if ( $_GET["do"] == "update"){
             $row = $pdo->query("SELECT * FROM orders where id = '".$_GET["id"]."' limit 1")->fetch();
             $shibe = $pdo->query("SELECT * FROM shibes where id = '".$row["id_shibe"]."' limit 1")->fetch();
+            if ($row["doge_out_address"] == 0){$row["doge_out_address"] = $row["doge_out_address"] = $shibe["doge_address"];};
       };
 
 
@@ -103,7 +104,87 @@ if(isset($_GET["do"])){
                   <div class="col-sm-12">
                       <div class="form-group">
                         <label><?php echo $lang["products_json"]; ?></label>
-                          <?php if (isset($row["products_json"])){ echo $row["products_json"]; }; ?>
+
+<?php
+$products = json_decode(html_entity_decode($row["products_json"]));
+
+foreach($products as $product)
+
+    {
+
+                      $row = $pdo->query("SELECT * FROM products where id = '".$product->id."' limit 1")->fetch();
+?>
+
+<div class="card card-warning">
+              <div class="card-header">
+                <h3 class="card-title"><?php if (isset($row["title"])){ echo $row["title"]; }; ?> [Id: <?php echo $product->id;?>]</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Ð <?php echo $lang["doge"]; ?></label>
+                        <input type="number" step="any" class="form-control" min="0" value="<?php if (isset($product->doge)){ echo $product->doge; }; ?>" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label><?php echo $lang["tax"]; ?> %</label>
+                        <input type="number" step="any" class="form-control" min="0" value="<?php if (isset($product->tax)){ echo $product->tax; }else{ echo "0"; }; ?>" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label><?php echo $lang["qty"]; ?></label>
+                        <input type="number" class="form-control" min="0" value="<?php if (isset($product->qty)){ echo $product->qty; }else{ echo "0"; }; ?>" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label><li class="fas fa-circle"></li> <?php echo $lang["moon_new"]; ?> <?php echo $lang["discount"]; ?></label>
+                        <input type="number" step="any" class="form-control" min="0" value="<?php if (isset($product->moon_new)){ echo $product->moon_new; }else{ echo "0.00"; }; ?>" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label><li class="far fa-circle"></li> <?php echo $lang["moon_full"]; ?> <?php echo $lang["discount"]; ?></label>
+                        <input type="number" step="any" class="form-control" min="0" value="<?php if (isset($product->moon_full)){ echo $product->moon_full; }else{ echo "0.00"; }; ?>" readonly="readonly">
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label><?php echo $lang["weight"]; ?></label>
+                        <input type="number" step="any" class="form-control" min="0" value="<?php if (isset($product->weight)){ echo $product->weight; }else{ echo "0"; }; ?>" readonly="readonly">
+                      </div>
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="form-group">
+                        <label><?php echo $lang["img"]; ?></label>
+                          <?php if (isset($row["imgs"]) and $row["imgs"] != ""){ ?>
+                            <?php
+                            $imgs = explode(",", $row["imgs"]);
+                            $total = count($imgs);
+                            for( $i=0 ; $i < $total ; $i++ ) {
+                              if ($imgs[$i] != ""){
+                              ?>
+                               <img src="../fl/<?php echo $imgs[$i];?>" style="max-width: 50px; padding: 3px">
+                              <?php
+                                };
+                            };
+                            ?>
+                          <?php }; ?>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+<?php
+    };
+?>
                       </div>
                     </div>
                   </div>
