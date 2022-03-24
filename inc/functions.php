@@ -10,7 +10,7 @@
     If (!defined('ROOTPATH')){
         exit();
      };
-
+     
     // Include the Dogecoin Core Bridge
     require_once ROOTPATH.'/vendors/dogecoinRPCBridge.php';
     $DogePHPbridgeCommand = new DogecoinRpc($config["rpcuser"], $config["rpcpassword"], $config["dogecoinCoreServer"], $config["dogecoinCoreServerPort"]);
@@ -53,8 +53,8 @@ class DogeBridge {
       '".$lang."',
       '".$id_page."',
       '".$type."',
-      '".filter_var($title, FILTER_SANITIZE_STRING)."',
-      '".filter_var($text, FILTER_SANITIZE_STRING)."',
+      '".filter_var($title, FILTER_SANITIZE_MAGIC_QUOTES)."',
+      '".filter_var($text, FILTER_SANITIZE_MAGIC_QUOTES)."',
       '".$ord."',
       '".$active."'
       );");
@@ -70,8 +70,8 @@ class DogeBridge {
       lang = '".$lang."',
       id_page = '".$id_page."',
       type = '".$type."',
-      title = '".filter_var($title, FILTER_SANITIZE_STRING)."',
-      text = '".filter_var($text, FILTER_SANITIZE_STRING)."',
+      title = '".filter_var($title, FILTER_SANITIZE_MAGIC_QUOTES)."',
+      text = '".filter_var($text, FILTER_SANITIZE_MAGIC_QUOTES)."',
       ord = '".$ord."',
       active = '".$active."'
       WHERE id = '".$id."' limit 1");
@@ -208,8 +208,8 @@ class DogeBridge {
       '".$lang."',
       '".$id_cat."',
       '".$icon."',
-      '".filter_var($title, FILTER_SANITIZE_STRING)."',
-      '".filter_var($text, FILTER_SANITIZE_STRING)."',
+      '".filter_var($title, FILTER_SANITIZE_MAGIC_QUOTES)."',
+      '".filter_var($text, FILTER_SANITIZE_MAGIC_QUOTES)."',
       '".$img."',
       '".$ord."',
       '".$active."'
@@ -226,8 +226,8 @@ class DogeBridge {
       lang = '".$lang."',
       id_cat = '".$id_cat."',
       icon = '".$icon."',
-      title = '".filter_var($title, FILTER_SANITIZE_STRING)."',
-      text = '".filter_var($text, FILTER_SANITIZE_STRING)."',
+      title = '".filter_var($title, FILTER_SANITIZE_MAGIC_QUOTES)."',
+      text = '".filter_var($text, FILTER_SANITIZE_MAGIC_QUOTES)."',
       img = '".$img."',
       ord = '".$ord."',
       active = '".$active."'
@@ -276,8 +276,8 @@ class DogeBridge {
       '".$qty."',
       '".$weight."',
       '".$highlighted."',
-      '".filter_var($title, FILTER_SANITIZE_STRING)."',
-      '".filter_var($text, FILTER_SANITIZE_STRING)."',
+      '".filter_var($title, FILTER_SANITIZE_MAGIC_QUOTES)."',
+      '".filter_var($text, FILTER_SANITIZE_MAGIC_QUOTES)."',
       '".$imgs."',
       '".$ord."',
       '".$date."',
@@ -300,8 +300,8 @@ class DogeBridge {
       qty = '".$qty."',
       weight = '".$weight."',
       highlighted = '".$highlighted."',
-      title = '".filter_var($title, FILTER_SANITIZE_STRING)."',
-      text = '".filter_var($text, FILTER_SANITIZE_STRING)."',
+      title = '".filter_var($title, FILTER_SANITIZE_MAGIC_QUOTES)."',
+      text = '".filter_var($text, FILTER_SANITIZE_MAGIC_QUOTES)."',
       imgs = '".$imgs."',
       ord = '".$ord."',
       date = '".$date."',
@@ -454,8 +454,8 @@ class DogeBridge {
       `active`
       ) VALUES (
       '".$country."',
-      '".filter_var($title, FILTER_SANITIZE_STRING)."',
-      '".filter_var($text, FILTER_SANITIZE_STRING)."',
+      '".filter_var($title, FILTER_SANITIZE_MAGIC_QUOTES)."',
+      '".filter_var($text, FILTER_SANITIZE_MAGIC_QUOTES)."',
       '".$weight."',
       '".$doge."',
       '".$active."'
@@ -470,8 +470,8 @@ class DogeBridge {
 
       $this->pdo->query("UPDATE shipping SET
       country = '".$country."',
-      title = '".filter_var($title, FILTER_SANITIZE_STRING)."',
-      text = '".filter_var($text, FILTER_SANITIZE_STRING)."',
+      title = '".filter_var($title, FILTER_SANITIZE_MAGIC_QUOTES)."',
+      text = '".filter_var($text, FILTER_SANITIZE_MAGIC_QUOTES)."',
       weight = '".$weight."',
       doge = '".$doge."',
       active = '".$active."'
@@ -520,7 +520,7 @@ class DogeBridge {
       '".$date."',
       '".$status."',
       '".$shipping."',
-      '".filter_var($products_json, FILTER_SANITIZE_STRING)."'
+      '".filter_var($products_json, FILTER_SANITIZE_MAGIC_QUOTES)."'
       );");
 
       return null;
@@ -541,7 +541,7 @@ class DogeBridge {
       date = '".$date."',
       status = '".$status."',
       shipping = '".$shipping."',
-      products_json = '".filter_var($products_json, FILTER_SANITIZE_STRING)."'
+      products_json = '".filter_var($products_json, FILTER_SANITIZE_MAGIC_QUOTES)."'
       WHERE id = '".$id."' limit 1");
 
       return null;

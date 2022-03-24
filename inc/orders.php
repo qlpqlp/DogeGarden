@@ -224,16 +224,16 @@ if (!isset($_GET["do"])){
                       $db = $pdo->query("SELECT * FROM orders where id_shibe = '".$_SESSION["shibe"]."'");
                       while ($row = $db->fetch()) {
 
-                        if ($row["confirmations"] < 3){ $status_btn = $lang["admin_orders_status_almost"]; $status_color = "warning"; };
+                        if ($row["confirmations"] <= 3){ $status_btn = $lang["admin_orders_status_almost"]; $status_color = "warning"; };
                         if ($row["confirmations"] == 0){ $status_btn = $lang["admin_orders_status_pending"]; $status_color = "secondary"; };
-                        if ($row["confirmations"] > 3){ $status_btn = $lang["admin_orders_status_verified"]; $status_color = "success"; };
+                        if ($row["confirmations"] >= 3){ $status_btn = $lang["admin_orders_status_verified"]; $status_color = "success"; };
 
                         if (isset($row["status"]) and $row["status"] > 0){ $status_btn = $row["status"];
-                            if ($row["status"] == 0 ){ $status_btn = $lang["pending"]; };
-                            if ($row["status"] == 1 ){ $status_btn = $lang["sended"]; };
-                            if ($row["status"] == 2 ){ $status_btn =  $lang["finish"]; };
-                            if ($row["status"] == 3 ){ $status_btn =  $lang["cancel"]; };
-                            if ($row["status"] == 4 ){ $status_btn =  $lang["refunded"]; };
+                            if ($row["status"] == 0 ){ $status_btn = $lang["pending"]; $status_color = "warning"; };
+                            if ($row["status"] == 1 ){ $status_btn = $lang["sended"]; $status_color = "success"; };
+                            if ($row["status"] == 2 ){ $status_btn =  $lang["finish"]; $status_color = "secondary"; };
+                            if ($row["status"] == 3 ){ $status_btn =  $lang["cancel"]; $status_color = "secondary"; };
+                            if ($row["status"] == 4 ){ $status_btn =  $lang["refunded"]; $status_color = "secondary"; };
                         };
                                               $shibe = $pdo->query("SELECT name FROM shibes where id = '".$row["id_shibe"]."' limit 1")->fetch();
                                               $shibe["name"] = explode(" ",$shibe["name"]);

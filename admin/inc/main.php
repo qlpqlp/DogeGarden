@@ -5,7 +5,7 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3><?php echo count($pdo->query("SELECT * FROM orders")->fetchAll()); ?></h3>
+                <h3><?php echo count($pdo->query("SELECT * FROM orders where status = 0 or status = ''")->fetchAll()); ?></h3>
 
                 <p><?php echo $lang["admin_new_orders"]; ?></p>
               </div>

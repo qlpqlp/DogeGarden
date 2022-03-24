@@ -106,7 +106,7 @@ class DogecoinRPC
             'params' => $params,
             'id'     => $this->id
         ));
-
+        
         // Build the cURL session
         $curl    = curl_init("{$this->proto}://{$this->host}:{$this->port}/{$this->url}");
         $options = array(

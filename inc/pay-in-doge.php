@@ -96,6 +96,11 @@ exit();
               $mail_message = "Hello ".$shibe["name"].",<br><br>Thank you for your recent purchase. Please make the payment of<br><br>Ð ".$total_doge." <br><br>to the address<br><br> ".$doge_in_address."<br><br> After payment you will recive a confirmation by email.<br><br>Much Thanks!";
               $d->SendEmail($config["mail_name_from"],$config["email_from"],$shibe["email"],$mail_subject,$mail_message);
 
+              // send copy to the Admin
+              $mail_subject = "Much Congrats Owner! Such New Order Recived!";
+              $mail_message = "Hello Owner,<br><br>The Shibe ".$shibe["name"]." (Id: ".$shibe["id"].")<br>>Has made an new order!<br><br>Total:<br><br>Ð ".$total_doge." <br><br>You can check on the Backoffice of your DogeGarden Store<br><br>Much Thanks!";
+              $d->SendEmail($config["mail_name_from"],$config["email_from"],$config["mail_name_from"],$mail_subject,$mail_message);
+
 ?>
 <div class="row">
 <div class="col-lg-3" style="float:none;margin:auto; text-align: center">

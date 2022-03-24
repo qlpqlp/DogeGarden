@@ -1,7 +1,6 @@
 <?php
 // include the configuration and functions
 include("config.php");
-
                       $db = $pdo->query("SELECT * FROM orders where status = 0"); // we get all orders with no status changed by the admin
                       while ($row = $db->fetch()) {
 
