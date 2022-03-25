@@ -248,7 +248,7 @@ include("../inc/config.php");
 
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <button class="btn btn-block btn-success" onclick="">Generate config.php file!</button>
+                        <button class="btn btn-block btn-success" onclick="$(this).css('background-color', '#666666');" >Generate config.php file!</button>
                       </div>
                     </div>
                   </div>
@@ -260,13 +260,10 @@ include("../inc/config.php");
               </div>
               <div id="test-l-3" class="content">
 <div class="callout callout-warning">
-    <p>Now, you have to import the database dogegarden.sql into your hosting/server using for exemple phpMyAdmin!</p>
+    <p>Now, you have to import the database dogegarden.sql into your hosting/server using for exemple phpMYAdmin!</p>
 </div>
 <div class="callout callout-warning">
     <p>To test if your Dogecoin Core Node is runnning correctly and connected to your DogeGarden Online Store, <a id="node" href="#" style="color: #DFA800; text-decoration: none">click here</a> ! <span id="noderesults"></span></p>
-</div>
-<div class="callout callout-warning">
-    <p>Create an CRON task on your hosting/server to run in every minute and point to the file inc/cron.php of the DogeGarden!</p>
 </div>
 <div class="callout callout-warning">
     <p>If all is OK, you can remove/delete the folder "install" from your Hosting/Server!</p>

@@ -26,6 +26,5 @@ if (isset($_POST["configfile"])){
 };
 ?>
 <script type="text/javascript">
-window.print();
-window.onfocus=function(){ window.close();}
+window.close();
 </script>
