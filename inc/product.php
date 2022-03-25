@@ -32,9 +32,9 @@
               </div>
             </div>
             <div class="col-12 col-sm-6">
-              <h3 class="my-3"><?php echo $rowc["title"]; ?></h3>
+              <h3 class="my-3"><?php echo $row["title"]; ?></h3>
               <p>
-                <?php echo $rowc["text"]; ?>
+                <?php //echo $rowc["text"]; ?>
               </p>
 
               <hr>
@@ -118,17 +118,14 @@
               </div>
 
               <div class="mt-4 product-share">
-                <a href="#" class="text-gray">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" target="_blank" class="text-gray">
                   <i class="fab fa-facebook-square fa-2x"></i>
                 </a>
-                <a href="#" class="text-gray">
+                <a href="https://twitter.com/intent/tweet?url=<?php echo urlencode((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"); ?>" target="_blank" class="text-gray">
                   <i class="fab fa-twitter-square fa-2x"></i>
                 </a>
-                <a href="#" class="text-gray">
+                <a href="mailto:?subject=<?php echo (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" class="text-gray">
                   <i class="fas fa-envelope-square fa-2x"></i>
-                </a>
-                <a href="#" class="text-gray">
-                  <i class="fas fa-rss-square fa-2x"></i>
                 </a>
               </div>
 
