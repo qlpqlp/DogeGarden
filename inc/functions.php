@@ -22,7 +22,7 @@
       $pdo = new PDO($db, $config["dbuser"], $config["dbpass"], $opt);
       }
     catch (PDOException $e) {
-      echo '<br>DB Error: ' . $e->getMessage() . '<br><br>'; echo '<br>This page will auto refresh in 5 seconds to check if the issue is resolved!'; header("Refresh:5"); exit();
+     if(isset($config["rpcuser"]) and $config["rpcuser"] != "" ){ echo '<br>DB Error: ' . $e->getMessage() . '<br><br>'; echo '<br>This page will auto refresh in 5 seconds to check if the issue is resolved!'; header("Refresh:5"); exit();};
      };
 
 
