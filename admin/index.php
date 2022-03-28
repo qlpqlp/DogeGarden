@@ -4,7 +4,7 @@ include("../inc/config.php");
 if (isset($_SESSION["admin"])){
     $url = 'http'.(isset($_SERVER['HTTPS'])?'s':'').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     $url_details = parse_url($url);
-    header('Location: http'.(isset($_SERVER['HTTPS'])?'s':'').'://'.$_SERVER['HTTP_HOST'].$url_details['path'].'/admin/wow.php');
+    header('Location: http'.(isset($_SERVER['HTTPS'])?'s':'').'://'.$_SERVER['HTTP_HOST'].$url_details['path'].'wow.php');
     exit;
 };
 ?>
