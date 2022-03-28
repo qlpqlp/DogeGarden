@@ -249,13 +249,14 @@ class DogeBridge {
 
 //// Products /////////
   // Add Product
-  public function InsertProduct($id_cat,$tax,$doge,$moon_new,$moon_full,$qty,$weight,$highlighted,$title,$text,$imgs,$ord,$date,$active)
+  public function InsertProduct($id_cat,$tax,$doge,$fiat,$moon_new,$moon_full,$qty,$weight,$highlighted,$title,$text,$imgs,$ord,$date,$active)
     {
 
      $this->pdo->query("INSERT INTO `products` (
       `id_cat`,
       `tax`,
       `doge`,
+      `fiat`,
       `moon_new`,
       `moon_full`,
       `qty`,
@@ -271,6 +272,7 @@ class DogeBridge {
       '".$id_cat."',
       '".$tax."',
       '".$doge."',
+      '".$fiat."',
       '".$moon_new."',
       '".$moon_full."',
       '".$qty."',
@@ -288,13 +290,14 @@ class DogeBridge {
     }
 
   // update an existent Product
-  public function UpdateProduct($id_cat,$tax,$doge,$moon_new,$moon_full,$qty,$weight,$highlighted,$title,$text,$imgs,$ord,$date,$active,$id)
+  public function UpdateProduct($id_cat,$tax,$doge,$fiat,$moon_new,$moon_full,$qty,$weight,$highlighted,$title,$text,$imgs,$ord,$date,$active,$id)
     {
 
       $this->pdo->query("UPDATE products SET
       id_cat = '".$id_cat."',
       tax = '".$tax."',
       doge = '".$doge."',
+      fiat = '".$fiat."',
       moon_new = '".$moon_new."',
       moon_full = '".$moon_full."',
       qty = '".$qty."',

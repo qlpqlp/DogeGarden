@@ -50,6 +50,7 @@ if(isset($_POST["action"])){
                 <form method="post" action="?d=<?php echo $_GET["d"]; ?>&do=<?php echo $_GET["do"]; ?>">
                   <input type="hidden" name="action" value="save" />
                   <?php if (isset($_GET["id"])){ ?><input type="hidden" name="id" value="<?php echo $_GET["id"];?>" /><?php }; ?>
+                  <input type="hidden" name="products_json" value="<?php echo $row["products_json"];?>" />
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">

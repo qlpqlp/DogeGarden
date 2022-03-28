@@ -1,6 +1,23 @@
 <?php
 // include the configuration and functions
 include("config.php");
+
+                        $array_hours = array("0","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00"); // hours to update dogecoin prices
+                        $hours = array_search(date("h:i"), $array_hours);
+                        if ($hours >= 1) {
+                          // we update all product dogecoin prices against current fiat value
+                          $db = $pdo->query("SELECT id,doge,fiat FROM products where fiat > 0");
+                          while ($row = $db->fetch())
+                          {
+
+                            $row["doge"] = $d->FiatDogeRates($row["fiat"], $config["fiat"]);
+                            $pdo->query("UPDATE products SET
+                            doge = '".$row["doge"]."'
+                            WHERE id = '".$row["id"]."' limit 1");
+
+                          };
+                        };
+
                       $db = $pdo->query("SELECT * FROM orders where status = 0"); // we get all orders with no status changed by the admin
                       while ($row = $db->fetch()) {
 
@@ -40,6 +57,18 @@ if ($row["doge_transaction_id"] == 0){ // if still there is no transaction ID we
               $mail_subject = "Much Wow! Payment in Doge Confirmed!!";
               $mail_message = "Hello ".$shibe["name"].",<br><br>Thank you for your recent purchase. Your payment is now confirmed.<br><br>Order Number:".$row["id"]." <br><br>We will update your order shortly. Any questions, just ask.<br><br>Much Thanks!";
               $d->SendEmail($config["mail_name_from"],$config["email_from"],$shibe["email"],$mail_subject,$mail_message);
+
+              // we update product quantity in stock
+              $products = json_decode(html_entity_decode($row["products_json"]));
+              foreach($products as $product)
+                  {
+                        $row_product = $pdo->query("SELECT qty FROM products where id = '".$product->id."' limit 1")->fetch();
+                        $row_product["qty"] = $row_product["qty"] - $product->qty;
+                        $pdo->query("UPDATE products SET
+                        qty = '".$row_product["qty"]."'
+                        WHERE id = '".$row_product["id"]."' limit 1");
+                  };
+
 
           // we update the order to check that the email was alredy sent
           $pdo->query("UPDATE orders SET

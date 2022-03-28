@@ -2,6 +2,14 @@
 // include the configuration and functions
 include("inc/config.php");
 
+// check if its installed and configured
+if(isset($config["rpcuser"]) and $config["rpcuser"] == "" ){
+    $url = 'http'.(isset($_SERVER['HTTPS'])?'s':'').'://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    $url_details = parse_url($url);
+    header('Location: http'.(isset($_SERVER['HTTPS'])?'s':'').'://'.$_SERVER['HTTP_HOST'].$url_details['path'].'install');
+    exit;
+};
+
 // check if shibe is loged in
 if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
     $row = $pdo->query("SELECT name,email,country FROM shibes where id = '".$_SESSION["shibe"]."' and active = 1 limit 1")->fetch();
@@ -37,7 +45,8 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
     }
   </style>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -148,7 +157,7 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
    <!-- Brand Logo -->
-    <a href="index.php" class="brand-link" style="">
+    <a href="index.php" class="brand-link" style="height: 70px !important">
       <img src="img/logo_dgg.png" alt="DogeGarden" style="max-width: 50px">
       <span class="brand-text font-weight-light"><?php echo $lang["store_logo"]; ?></span>
 <?php if ($config["demo"] == 1){ ?>
@@ -159,7 +168,7 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
       <!-- <span class="brand-text font-weight-light" style="font-size: 10px"><?php echo $lang["store_slogan"]; ?></span> -->
     </a>
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" style="padding-top: 20px">
       <!-- Sidebar user panel (optional) -->
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -344,7 +353,7 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
           1 <?php echo strtoupper($config["fiat"]);?> = <?php echo $d->FiatDogeRates("1.00", $config["fiat"]); ?> &ETH;
           </div>
         </span>
-  <?php };?>
+    <?php };?>
 
     <!-- /.sidebar -->
   </aside>
@@ -379,16 +388,6 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
     }else{
         include("inc/main.php");
     };
-
-    ?>
-
-    <?php
-    //if (isset($_GET["product"])){ include("inc/product.php"); };
-    //if (isset($_GET["c"])){ include("inc/products.php"); };
-    //if (isset($_GET["page"])){ include("inc/page.php"); };
-
-  //  if (!isset($_GET["page"]) and !isset($_GET["product"]) and !isset($_GET["c"])){  include("inc/main.php"); };
-
 
     ?>
     </div>

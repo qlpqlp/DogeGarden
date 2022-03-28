@@ -28,10 +28,10 @@ if(isset($_POST["action"])){
     };
 
     if ( $_GET["do"] == "insert"){
-        $d->InsertProduct($_POST["id_cat"],$_POST["tax"],$_POST["doge"],$_POST["moon_new"],$_POST["moon_full"],$_POST["qty"],$_POST["weight"],$_POST["highlighted"],$_POST["title"],$_POST["text"],$_POST["imgs"],$_POST["ord"],date('Y-m-d H:i:s'),$_POST["active"]);
+        $d->InsertProduct($_POST["id_cat"],$_POST["tax"],$_POST["doge"],$_POST["fiat"],$_POST["moon_new"],$_POST["moon_full"],$_POST["qty"],$_POST["weight"],$_POST["highlighted"],$_POST["title"],$_POST["text"],$_POST["imgs"],$_POST["ord"],date('Y-m-d H:i:s'),$_POST["active"]);
     }
     if ( $_GET["do"] == "update"){
-        $d->UpdateProduct($_POST["id_cat"],$_POST["tax"],$_POST["doge"],$_POST["moon_new"],$_POST["moon_full"],$_POST["qty"],$_POST["weight"],$_POST["highlighted"],$_POST["title"],$_POST["text"],$_POST["imgs"],$_POST["ord"],date('Y-m-d H:i:s'),$_POST["active"],$_POST["id"]);
+        $d->UpdateProduct($_POST["id_cat"],$_POST["tax"],$_POST["doge"],$_POST["fiat"],$_POST["moon_new"],$_POST["moon_full"],$_POST["qty"],$_POST["weight"],$_POST["highlighted"],$_POST["title"],$_POST["text"],$_POST["imgs"],$_POST["ord"],date('Y-m-d H:i:s'),$_POST["active"],$_POST["id"]);
     };
     $_GET["id"] = null; $_GET["do"] = null; $_GET["action"] = null;
 };
@@ -108,6 +108,12 @@ if(isset($_POST["action"])){
                       <div class="form-group">
                         <label>Ð <?php echo $lang["doge"]; ?></label>
                         <input type="number" step="any" name="doge" class="form-control" min="0" value="<?php if (isset($row["doge"])){ echo $row["doge"]; }; ?>" placeholder="0" required="required">
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label><?php echo strtoupper($config["fiat"]); ?></label>
+                        <input type="number" step="any" name="fiat" class="form-control" min="0" value="<?php if (isset($row["fiat"])){ echo $row["fiat"]; }; ?>" placeholder="0">
                       </div>
                     </div>
                     <div class="col-sm-4">
@@ -228,6 +234,7 @@ if (!isset($_GET["do"])){
                     <th><?php echo $lang["cat"]; ?></th>
                     <th><?php echo $lang["title"]; ?></th>
                     <th>Ð <?php echo $lang["doge"]; ?></th>
+                    <th><?php echo strtoupper($config["fiat"]); ?></th>
                     <th><?php echo $lang["tax"]; ?> %</th>
                     <th><?php echo $lang["moon_new"]; ?></th>
                     <th><?php echo $lang["moon_full"]; ?></th>
@@ -262,6 +269,7 @@ if (!isset($_GET["do"])){
                     </td>
                     <td><?php echo $row["title"];?></td>
                     <td>Ð <?php echo $row["doge"];?></td>
+                    <td><?php echo $row["fiat"];?></td>
                     <td><?php echo $row["tax"];?></td>
                     <td><?php echo $row["moon_new"];?></td>
                     <td><?php echo $row["moon_full"];?></td>

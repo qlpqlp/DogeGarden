@@ -42,7 +42,7 @@ if (!isset($_SESSION["admin"])){
     }
   </style>
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center" style="margin-top: -20px;">
@@ -100,7 +100,7 @@ if (!isset($_SESSION["admin"])){
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="wow.php" class="brand-link" style="">
+    <a href="wow.php" class="brand-link" style="height: 70px !important;">
       <img src="../img/logo_dgg.png" alt="DogeGarden" style="max-width: 50px">
       <span class="brand-text font-weight-light"><?php echo $lang["admin_logo"]; ?></span>
 <?php if ($config["demo"] == 1){ ?>
@@ -111,7 +111,7 @@ if (!isset($_SESSION["admin"])){
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" style="padding-top: 20px">
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
@@ -219,6 +219,14 @@ if (!isset($_SESSION["admin"])){
       </nav>
       <!-- /.sidebar-menu -->
     </div>
+    <?php if (isset($config["fiat"]) and $config["fiat"] != ""){ ?>
+        <span class="brand-text font-weight-light">
+          <div style="color: #666666; padding: 10px; position: absolute; bottom: 20px;" id="fiat">
+          1 &ETH; = <?php echo $d->DogeFiatRates($config["fiat"]); ?> <?php echo strtoupper($config["fiat"]);?><br>
+          1 <?php echo strtoupper($config["fiat"]);?> = <?php echo $d->FiatDogeRates("1.00", $config["fiat"]); ?> &ETH;
+          </div>
+        </span>
+    <?php };?>
     <!-- /.sidebar -->
   </aside>
 

@@ -1,4 +1,4 @@
 <?php
 // DogeGarden Verion
-$lang["version"] = "Beta v69.420.010";
+$lang["version"] = "Beta v69.420.011";
 ?>

@@ -11,7 +11,7 @@ DogeGarden
 
 2- Upload all files (excluding dogegarden.sql and readme.md) to your Hosting Account.
 
-3- Now navigate into https://your-domain.com/install and follow the instructions
+3- Now navigate into you domain url and follow the instructions
 
 ###Notes:
 - This is a Beta Version so is best for now only use on DogeCoin Core Wallet on TestNet untill more people test it and see if everything is ok :)
