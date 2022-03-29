@@ -239,7 +239,7 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
                         $active = "";
                         // we find the category associeted with the product
                         if (isset($_GET["product"])){
-                          $dbmp = $pdo->query("SELECT id_cat FROM products where id = '".$_GET["product"]."' and active = 1 limit 1")->fetch();
+                          $dbmp = $pdo->query("SELECT id_cat FROM products where id = '".$d->CleanString($_GET["product"])."' and active = 1 limit 1")->fetch();
                           $dbm = $pdo->query("SELECT id FROM categories where id = '".$dbmp["id_cat"]."' and id_cat = '".$row["id"]."' and lang = '".$_SESSION["l"]."' and active = 1 limit 1")->fetch();
                           if ($dbm["id"] > 0){
                             $active = "active";
@@ -247,7 +247,7 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
                         }else{
                             // we find the category associeted with the sub category
                             if (isset($_GET["c"])){
-                              $dbm = $pdo->query("SELECT id FROM categories where id = '".$_GET["c"]."' and id_cat = '".$row["id"]."' and lang = '".$_SESSION["l"]."' and active = 1 limit 1")->fetch();
+                              $dbm = $pdo->query("SELECT id FROM categories where id = '".$d->CleanString($_GET["c"])."' and id_cat = '".$row["id"]."' and lang = '".$_SESSION["l"]."' and active = 1 limit 1")->fetch();
                               if ($dbm["id"] > 0){
                                 $active = "active";
                               };
@@ -374,6 +374,87 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
                 </div>
               </div>
             </div>
+
+
+        <?php
+
+            $filter = "id_cat = 0 and id_prod = 0 and id_page = 0";
+            if (isset($_GET["c"])){ $filter = "id_cat = ".$d->CleanString($_GET["c"]); };
+            if (isset($_GET["product"])){ $filter = "id_prod = ".$d->CleanString($_GET["product"]); };
+            if (isset($_GET["page"])){ $filter = "id_page = ".$d->CleanString($_GET["page"]); };
+
+            $bd = $pdo->query("SELECT * FROM banners where lang = '".$_SESSION["l"]."' and ".$filter." and active = 1")->fetch();
+            if (isset($bd["id"])){
+         ?>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <div id="carouselDogeIndicators" class="carousel slide pointer-event" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                  <?php
+                      $i = 0;
+                      $db = $pdo->query("SELECT * FROM banners where lang = '".$_SESSION["l"]."' and ".$filter." and active = 1");
+                      while ($row = $db->fetch()) {
+                  ?>
+                      <li data-target="#carouselDogeIndicators" data-slide-to="<?php echo $i; ?>" class="<?php if ($i == 0){ ?>active<?php };?>"></li>
+                  <?php
+                  $i++;
+                  };
+                  ?>
+                    </ol>
+                    <div class="carousel-inner" style="max-height: 300px;">
+
+                  <?php
+                      $i = 0;
+                      $db = $pdo->query("SELECT * FROM banners where lang = '".$_SESSION["l"]."' and ".$filter." and active = 1");
+                      while ($row = $db->fetch()) {
+                  ?>
+                      <div class="carousel-item <?php if ($i == 0){ ?>active<?php };?>" style="background-image: url(fl/<?php echo $row["img"]; ?>); background-size: cover; background-position: center; background-repeat: no-repeat">
+                      <?php
+                      if ($row["video"] != ""){
+                      ?>
+                      <div style="position: absolute; width: 100%;height: 56.25vw !important;margin-top: -5.9vw;">
+                        <div data-video="data-video" data-autoplay="true" data-hide-controls="true" data-loop="true" class="video-block" style="position: absolute;height: 100%;width: 100%;margin: 0;padding: 0;">
+                            <iframe src="<?php echo $row["video"];?>?rel=0&controls=0&showinfo=0&wmode=opaque&autoplay=1&modestbranding=1&loop=1&mute=1" width="100%" height="100%" class="video-block__media" style="opacity: 1; transition: opacity 0.5s ease-in-out 0s;" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; playlist; loop" ></iframe>
+                        </div>
+                      </div>
+                      <div style=" width: 100%; min-height: 300px;">&nbsp;</div>
+                        <?php
+                        }else{
+                        ?>
+                        <img src="fl/<?php echo $row["img"]; ?>" style="width: 100%">
+<!--                        <div style=" width: 100%; min-height: 300px;">&nbsp;</div>-->
+                        <?php
+                        };
+                        ?>
+                      </div>
+                  <?php
+                  $i++;
+                  };
+                  ?>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselDogeIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-custom-icon" aria-hidden="true">
+                        <i class="fas fa-chevron-left"></i>
+                      </span>
+                      <span class="sr-only"><?php echo $lang["previous"]; ?></span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselDogeIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-custom-icon" aria-hidden="true">
+                        <i class="fas fa-chevron-right"></i>
+                      </span>
+                      <span class="sr-only"><?php echo $lang["next"]; ?></span>
+                    </a>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+              </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        <?php }; ?>
 
     <?php
     // we check if the file exists befor importing
@@ -510,6 +591,18 @@ $(document).ready(function(){
                     html:
                       '<img src="img/sad_doge.gif"><br><br>' +
                       '<?php echo $lang["error_node"]; ?>',
+                  })
+<?php }; ?>
+// wen we verify that the Dogecoin Node is not running!
+<?php if (isset($_GET["d"]) and $_GET["d"] == "shipping"){ ?>
+                  swal.fire({
+                    icon: 'warning',
+                    title: '<?php echo $lang["sad"]; ?>',
+                    showConfirmButton: true,
+                    confirmButtonColor: '#666666',
+                    html:
+                      '<img src="img/sad_doge.gif"><br><br>' +
+                      'Sorry there is no active shipping for your country!',
                   })
 <?php }; ?>
 // wen we a shibe is registered

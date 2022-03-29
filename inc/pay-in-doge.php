@@ -40,9 +40,9 @@ exit();
                       $pdo->query("UPDATE cart SET id_shibe = '".$_SESSION["shibe"]."' WHERE id_shibe = '0' and session = '".session_id()."'");
                       // we get the cart products
                       $db = $pdo->query("SELECT id,product_id,qty FROM cart where id_shibe = '".$_SESSION["shibe"]."'");
-        }else{  // if Shib is not loged in we get the session cart
+        //}else{  // if Shib is not loged in we get the session cart
                       // we get the cart products
-                      $db = $pdo->query("SELECT id,product_id,qty FROM cart where session = '".session_id()."'");
+          //            $db = $pdo->query("SELECT id,product_id,qty FROM cart where session = '".session_id()."'");
         };
                       while ($row = $db->fetch())
                       {
@@ -75,10 +75,21 @@ exit();
 ?>
 <?php if ($cartqty > 0){ // if cart not empty
     if (isset($_SESSION["country"])){ // we checj if Shibe is logged in and we get only shipping from all countries or his own country
-        $shipping = $pdo->query("SELECT doge FROM shipping where weight >= '".$cartweight."' and country = '' or country = '".$_SESSION["country"]."' order by weight ASC limit 1")->fetch();
-    }else{
-        $shipping = $pdo->query("SELECT doge FROM shipping where weight >= '".$cartweight."' order by weight ASC limit 1")->fetch();
-    }
+        $shipping = $pdo->query("SELECT id,doge,country FROM shipping where weight >= '".$cartweight."' and (country = '' or country = '".$_SESSION["country"]."') order by weight ASC limit 1")->fetch();
+   // }else{
+   //     $shipping = $pdo->query("SELECT id,doge FROM shipping where weight >= '".$cartweight."' order by weight ASC limit 1")->fetch();
+    };
+
+    // we make sure there is a shipping method to send/sell to that country
+    if (!isset($shipping["id"])){
+?>
+    <script>
+            window.location.href = "//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>?d=shipping";
+    </script>
+<?php
+    exit();
+    };
+
     if (!isset($shipping["doge"])){ $shipping["doge"] = 0; };
 
       $total_doge = number_format((float)(($carttotal + $shipping["doge"])), 8, '.', '');

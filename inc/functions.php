@@ -445,7 +445,7 @@ class DogeBridge {
 
 //// shipping /////////
   // Add shipping
-  public function InsertShipping($country,$title,$text,$weight,$doge,$active)
+  public function InsertShipping($country,$title,$text,$weight,$doge,$fiat,$active)
     {
 
       $this->pdo->query("INSERT INTO `shipping` (
@@ -454,6 +454,7 @@ class DogeBridge {
       `text`,
       `weight`,
       `doge`,
+      `fiat`,
       `active`
       ) VALUES (
       '".$country."',
@@ -461,6 +462,7 @@ class DogeBridge {
       '".filter_var($text, FILTER_SANITIZE_MAGIC_QUOTES)."',
       '".$weight."',
       '".$doge."',
+      '".$fiat."',
       '".$active."'
       );");
 
@@ -468,7 +470,7 @@ class DogeBridge {
     }
 
   // update an existent shipping
-  public function UpdateShipping($country,$title,$text,$weight,$doge,$active,$id)
+  public function UpdateShipping($country,$title,$text,$weight,$doge,$fiat,$active,$id)
     {
 
       $this->pdo->query("UPDATE shipping SET
@@ -477,6 +479,7 @@ class DogeBridge {
       text = '".filter_var($text, FILTER_SANITIZE_MAGIC_QUOTES)."',
       weight = '".$weight."',
       doge = '".$doge."',
+      fiat = '".$fiat."',
       active = '".$active."'
       WHERE id = '".$id."' limit 1");
 
@@ -746,15 +749,15 @@ class DogeBridge {
     }
 
     // This function converts 1 Doge to Fiat
-  public function DogeFiatRates($fiat = "usd") {
+  public function DogeFiatRates($fiat) {
 
         $price = json_decode(file_get_contents("https://api.coingecko.com/api/v3/coins/markets?vs_currency=".$fiat."&ids=dogecoin&per_page=1&page=1&sparkline=false"));
         return $price[0]->current_price;
   }
 
     // This function converts current Fiat to Doge
-  public function FiatDogeRates($price = 0, $fiat = "usd") {
-        $price = $price / $this->DogeFiatRates($fiat = "usd");
+  public function FiatDogeRates($price = 0, $fiat) {
+        $price = $price / $this->DogeFiatRates($fiat);
         return $price;
   }
 

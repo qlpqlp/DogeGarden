@@ -99,7 +99,7 @@ CREATE TABLE `products` (
   `id_cat` bigint(20) NOT NULL,
   `tax` decimal(10,2) NOT NULL,
   `doge` decimal(20,8) NOT NULL,
-  `fiat` decimal(20,8) NOT NULL,  
+  `fiat` decimal(20,8) NOT NULL,
   `moon_new` decimal(10,2) DEFAULT '0.00',
   `moon_full` decimal(10,2) DEFAULT NULL,
   `qty` bigint(11) DEFAULT '0',
@@ -148,6 +148,7 @@ CREATE TABLE `shipping` (
   `text` varchar(255) DEFAULT NULL,
   `weight` decimal(10,2) DEFAULT NULL,
   `doge` decimal(20,8) DEFAULT NULL,
+  `fiat` decimal(20,8) NOT NULL,  
   `active` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

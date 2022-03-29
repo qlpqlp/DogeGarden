@@ -84,7 +84,7 @@ if(isset($_POST["action"])){
                         };
                         ?>
                         <?php
-                        if ($row["id_page"] > 0 ){
+                        if ($row["id_cat"] > 0 ){
                             $dbsub = $pdo->query("SELECT * FROM categories where id = '".$row["id_cat"]."' limit 1");
                             while ($rowsub = $dbsub->fetch()) {
                         ?>
@@ -113,7 +113,7 @@ if(isset($_POST["action"])){
                         };
                         ?>
                         <?php
-                        if ($row["id_page"] > 0 ){
+                        if ($row["id_prod"] > 0 ){
                             $dbsub = $pdo->query("SELECT * FROM products where id = '".$row["id_prod"]."' limit 1");
                             while ($rowsub = $dbsub->fetch()) {
                         ?>

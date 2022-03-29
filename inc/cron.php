@@ -4,14 +4,28 @@ include("config.php");
 
                         $array_hours = array("0","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00"); // hours to update dogecoin prices
                         $hours = array_search(date("h:i"), $array_hours);
-                        if ($hours >= 1) {
+                        if (1 == 1) {
+
+                          // we get current Doge value against fiat
+                          $fiat_doge = $d->DogeFiatRates($config["fiat"]);
+
                           // we update all product dogecoin prices against current fiat value
                           $db = $pdo->query("SELECT id,doge,fiat FROM products where fiat > 0");
                           while ($row = $db->fetch())
                           {
-
-                            $row["doge"] = $d->FiatDogeRates($row["fiat"], $config["fiat"]);
+                            $row["doge"] = $row["fiat"] / $fiat_doge;
                             $pdo->query("UPDATE products SET
+                            doge = '".$row["doge"]."'
+                            WHERE id = '".$row["id"]."' limit 1");
+
+                          };
+
+                          // we update all product dogecoin prices against current fiat value
+                          $db = $pdo->query("SELECT id,doge,fiat FROM shipping where fiat > 0");
+                          while ($row = $db->fetch())
+                          {
+                            $row["doge"] = $row["fiat"] / $fiat_doge;
+                            $pdo->query("UPDATE shipping SET
                             doge = '".$row["doge"]."'
                             WHERE id = '".$row["id"]."' limit 1");
 

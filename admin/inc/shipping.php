@@ -16,10 +16,10 @@ if(isset($_GET["do"])){
 
 if(isset($_POST["action"])){
     if ( $_GET["do"] == "insert"){
-        $d->InsertShipping($_POST["country"],$_POST["title"],$_POST["text"],$_POST["weight"],$_POST["doge"],$_POST["active"]);
+        $d->InsertShipping($_POST["country"],$_POST["title"],$_POST["text"],$_POST["weight"],$_POST["doge"],$_POST["fiat"],$_POST["active"]);
     }
     if ( $_GET["do"] == "update"){
-        $d->UpdateShipping($_POST["country"],$_POST["title"],$_POST["text"],$_POST["weight"],$_POST["doge"],$_POST["active"],$_POST["id"]);
+        $d->UpdateShipping($_POST["country"],$_POST["title"],$_POST["text"],$_POST["weight"],$_POST["doge"],$_POST["fiat"],$_POST["active"],$_POST["id"]);
     };
     $_GET["id"] = null; $_GET["do"] = null; $_GET["action"] = null;
 };
@@ -72,20 +72,25 @@ if(isset($_POST["action"])){
                       </div>
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                       <div class="form-group">
                         <label><?php echo $lang["until"]; ?> <?php echo $lang["weight"]; ?></label>
                         <input type="number" step="any" name="weight" class="form-control" min="0" value="<?php if (isset($row["weight"])){ echo $row["weight"]; }else{ echo "0.00"; }; ?>" placeholder="0" required="required">
                       </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                       <div class="form-group">
                         <label>Ð <?php echo $lang["doge"]; ?></label>
                         <input type="number" step="any" name="doge" class="form-control" min="0" value="<?php if (isset($row["doge"])){ echo $row["doge"]; }else{ echo "0.00"; }; ?>" placeholder="0">
                       </div>
                     </div>
-
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label><?php echo strtoupper($config["fiat"]); ?></label>
+                        <input type="number" step="any" name="fiat" class="form-control" min="0" value="<?php if (isset($row["fiat"])){ echo $row["fiat"]; }else{ echo "0.00"; }; ?>" placeholder="0">
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
                       <div class="form-group">
                         <label><?php echo $lang["active"]; ?></label>
                         <select class="form-control" name="active">
@@ -128,6 +133,7 @@ if (!isset($_GET["do"])){
                     <th><?php echo $lang["title"]; ?></th>
                     <th><?php echo $lang["weight"]; ?></th>
                     <th>Ð <?php echo $lang["doge"]; ?></th>
+                    <th><?php echo strtoupper($config["fiat"]); ?></th>
                     <th><?php echo $lang["active"]; ?></th>
                     <th><?php echo $lang["options"]; ?></th>
                   </tr>
@@ -143,6 +149,7 @@ if (!isset($_GET["do"])){
                     <td><?php echo $row["title"];?></td>
                     <td><?php echo $row["weight"];?></td>
                     <td>Ð <?php echo $row["doge"];?></td>
+                    <td><?php echo $row["fiat"];?></td>
                     <td>
                             <?php if ($row["active"] == 0 ){ echo $lang["disable"]; }; ?>
                             <?php if ($row["active"] == 1 ){ echo $lang["active"]; }; ?>

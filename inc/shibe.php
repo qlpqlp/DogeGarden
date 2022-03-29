@@ -4,9 +4,10 @@ if(isset($_GET["do"])){
 
       // we verify and login the Sibe
       if ($_GET["do"] == "login" and isset($_POST["email"]) and isset($_POST["password"])){
-                      $row = $pdo->query("SELECT id FROM shibes where email = '".$d->CleanEmail($_POST["email"])."' and password = '".hash('sha256', $_POST["password"])."' and active = 1 limit 1")->fetch();
+                      $row = $pdo->query("SELECT id,country FROM shibes where email = '".$d->CleanEmail($_POST["email"])."' and password = '".hash('sha256', $_POST["password"])."' and active = 1 limit 1")->fetch();
                       if (isset($row["id"])){
                         $_SESSION["shibe"] = $row["id"];
+                        $_SESSION["country"] = $row["country"];
 ?>
     <script>
             window.location.href = "//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>?shibe=login";
@@ -33,6 +34,7 @@ if(isset($_GET["do"])){
       // we logout the shib
       if ( $_GET["do"] == "logout"){
             $_SESSION["shibe"] = NULL;
+            $_SESSION["country"] = NULL;
 ?>
     <script>
             window.location.href = "//<?php echo $_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']; ?>?shibe=logout";
@@ -71,6 +73,7 @@ if(isset($_POST["action"])){
         $exists = $pdo->query("SELECT id FROM shibes where id <> '".$_SESSION["shibe"]."' and (email = '".$d->CleanEmail($_POST["email"])."')) limit 1")->fetch();
         if (!isset($exists["id"])){
             $d->UpdateShibe($d->CleanString($_POST["name"]),$d->CleanEmail($_POST["email"]),$_POST["password"],$d->CleanString($_POST["tax_id"]),$d->CleanString($_POST["address"]),$d->CleanString($_POST["postal_code"]),$d->CleanString($_POST["country"]),$d->CleanString($_POST["city"]),$d->CleanString($_POST["phone"]),$d->CleanString($_POST["doge_address"]),$d->CleanString($_POST["active"]),date("Y-m-d H:i:s"),$_SESSION["shibe"]);
+            $_SESSION["country"] = $_POST["country"];
         };
     };
 
