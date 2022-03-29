@@ -118,6 +118,16 @@ if (!isset($_SESSION["admin"])){
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+          <li class="nav-item <?php if ($_GET["d"] == "main" or $_GET["d"] == "pos"){ ?>menu-open<?php }; ?>">
+            <a href="?d=pos" class="nav-link <?php if ($_GET["d"] == "pos"){ ?>active<?php }; ?>">
+              <i class="nav-icon fas fa fa-mobile nav-icon"></i>
+              <p>
+               PoS Terminal
+                <i class="right fas fa fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+
           <li class="nav-item <?php if ($_GET["d"] == "main" or $_GET["d"] == "banners" or $_GET["d"] == "pages" or !isset($_GET["d"])){ ?>menu-open<?php }; ?>">
             <a href="?d=main" class="nav-link <?php if ($_GET["d"] == "main" or $_GET["d"] == "banners" or $_GET["d"] == "pages" or !isset($_GET["d"])){ ?>active<?php }; ?>">
               <i class="nav-icon far fa fa-store nav-icon"></i>

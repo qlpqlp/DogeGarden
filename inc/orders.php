@@ -23,8 +23,8 @@ if(isset($_GET["do"])){
 
       // if we are goin to update will get only one record
       if ( $_GET["do"] == "update"){
-            $row = $pdo->query("SELECT * FROM orders where id = '".$_GET["id"]."' limit 1")->fetch();
-            $shibe = $pdo->query("SELECT * FROM shibes where id = '".$row["id_shibe"]."' limit 1")->fetch();
+            $row = $pdo->query("SELECT * FROM orders where id = '".$_GET["id"]."'and id_shibe = '".$_SESSION["shibe"]."' limit 1")->fetch();
+            $shibe = $pdo->query("SELECT * FROM shibes where id = '".$_SESSION["id_shibe"]."' limit 1")->fetch();
             if ($row["doge_out_address"] == 0){$row["doge_out_address"] = $row["doge_out_address"] = $shibe["doge_address"];};
       };
 
@@ -169,7 +169,7 @@ foreach($products as $product)
                             for( $i=0 ; $i < $total ; $i++ ) {
                               if ($imgs[$i] != ""){
                               ?>
-                               <img src="../fl/<?php echo $imgs[$i];?>" style="max-width: 50px; padding: 3px">
+                               <img src="fl/<?php echo $imgs[$i];?>" style="max-width: 50px; padding: 3px">
                               <?php
                                 };
                             };

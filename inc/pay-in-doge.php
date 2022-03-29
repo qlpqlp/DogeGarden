@@ -84,7 +84,25 @@ exit();
       $total_doge = number_format((float)(($carttotal + $shipping["doge"])), 8, '.', '');
 
       $d->InsertOrder($_SESSION["shibe"],0,0,$carttotaltax,$total_doge,0,0,date("Y-m-d H:i:s"),$shipping["doge"],json_encode($products_json),0);
-      $order = $pdo->query("SELECT * FROM orders order by id DESC limit 1")->fetch();
+      $order = $pdo->query("SELECT * FROM orders where id_shibe = '".$_SESSION["shibe"]."' order by id DESC limit 1")->fetch();
+
+
+      $products = json_decode(html_entity_decode($order["products_json"]));
+
+      $products_email = "Products/Services details<br>";
+      foreach($products as $product)
+
+      {
+        $products_email .= "____________________<br>";
+        $products_email .= $product->title." [Id: ".$product->id."]<br>";
+        $products_email .= "Ð ".$lang["doge"].": ".$product->doge."<br>";
+        if (isset($product->tax)){ $products_email .= $lang["tax"]." %".": ".$product->tax."<br>"; };
+        if (isset($product->qty)){ $products_email .= $lang["qty"].": ".$product->qty."<br>"; };
+        if (isset($product->moon_new)){ $products_email .= $lang["moon_new"]." ".$lang["discount"].": ".$product->moon_new."<br>"; };
+        if (isset($product->moon_full)){ $products_email .= $lang["moon_full"]." ".$lang["discount"].": ".$product->moon_full."<br>"; };
+        if (isset($product->weight)){ $products_email .= $lang["weight"]. ": ".$product->weight."<br>"; };
+        $products_email .= "____________________<br>";
+      }
 
       $doge_in_address = $DogePHPbridgeCommand->getnewaddress("DogeGarden->".$_SESSION["shibe"]."->".$order["id"]."->".time());
 
@@ -93,12 +111,12 @@ exit();
                 $shibe = $pdo->query("SELECT * FROM shibes where id = '".$_SESSION["shibe"]."' limit 1")->fetch();
               // we send an email to the Shibe confirming the payment recived
               $mail_subject = "Much Wow! Such Doge Payment Waiting!";
-              $mail_message = "Hello ".$shibe["name"].",<br><br>Thank you for your recent purchase. Please make the payment of<br><br>Ð ".$total_doge." <br><br>to the address<br><br> ".$doge_in_address."<br><br> After payment you will recive a confirmation by email.<br><br>Much Thanks!";
+              $mail_message = "Hello ".$shibe["name"].",<br><br>Thank you for your recent purchase. Please make the an total payment of<br><br>Ð ".$total_doge." <br><br>to the address<br><br> ".$doge_in_address."<br><br> After payment you will recive a confirmation by email.<br><br>".$products_email."<br><br>Much Thanks!";
               $d->SendEmail($config["mail_name_from"],$config["email_from"],$shibe["email"],$mail_subject,$mail_message);
 
               // send copy to the Admin
               $mail_subject = "Much Congrats Owner! Such New Order Recived!";
-              $mail_message = "Hello Owner,<br><br>The Shibe ".$shibe["name"]." (Id: ".$shibe["id"].")<br>>Has made an new order!<br><br>Total:<br><br>Ð ".$total_doge." <br><br>You can check on the Backoffice of your DogeGarden Store<br><br>Much Thanks!";
+              $mail_message = "Hello Owner,<br><br>The Shibe ".$shibe["name"]." (Id: ".$shibe["id"].")<br>>Has made an new order!<br><br>Total:<br><br>Ð ".$total_doge." <br><br>".$products_email."<br><br>You can check on the Backoffice of your DogeGarden Store<br><br>Much Thanks!";
               $d->SendEmail($config["mail_name_from"],$config["email_from"],$config["mail_name_from"],$mail_subject,$mail_message);
 
 ?>
@@ -113,6 +131,7 @@ exit();
                         </div>
                       </div>
                       <?php echo $doge_in_address; ?>
+                      <a href="?d=orders&do=update&id=<?php echo $order["id"]; ?>" class="btn btn-warning" style="margin-top: 10px; margin-bottom: 10px; width: inherit">View Order Details</a>
                     </div>
 </div>
     <div class="callout callout-warning">
