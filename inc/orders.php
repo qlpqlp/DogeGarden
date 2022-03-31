@@ -24,7 +24,7 @@ if(isset($_GET["do"])){
       // if we are goin to update will get only one record
       if ( $_GET["do"] == "update"){
             $row = $pdo->query("SELECT * FROM orders where id = '".$_GET["id"]."'and id_shibe = '".$_SESSION["shibe"]."' limit 1")->fetch();
-            $shibe = $pdo->query("SELECT * FROM shibes where id = '".$_SESSION["id_shibe"]."' limit 1")->fetch();
+            $shibe = $pdo->query("SELECT * FROM shibes where id = '".$_SESSION["shibe"]."' limit 1")->fetch();
             if ($row["doge_out_address"] == 0){$row["doge_out_address"] = $row["doge_out_address"] = $shibe["doge_address"];};
       };
 
@@ -33,7 +33,7 @@ if(isset($_GET["do"])){
 
 <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title"><?php echo $lang["admin_orders_title"]; ?></h3>
+                <h3 class="card-title"><?php echo $lang["admin_orders_title"]; ?> <?php if (isset($_GET["id"])){ ?>[Id: <?php echo $_GET["id"]; ?>]<?php }; ?></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

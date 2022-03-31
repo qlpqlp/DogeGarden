@@ -377,8 +377,8 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
 
 
         <?php
-
             $filter = "id_cat = 0 and id_prod = 0 and id_page = 0";
+            if (isset($_GET["d"])){ $filter = "id_page < 0"; }; // to fix the shib account pages to not show banners
             if (isset($_GET["c"])){ $filter = "id_cat = ".$d->CleanString($_GET["c"]); };
             if (isset($_GET["product"])){ $filter = "id_prod = ".$d->CleanString($_GET["product"]); };
             if (isset($_GET["page"])){ $filter = "id_page = ".$d->CleanString($_GET["page"]); };

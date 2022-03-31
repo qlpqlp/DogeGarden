@@ -43,14 +43,14 @@ if(isset($_POST["action"])){
 
 <div class="card card-warning">
               <div class="card-header">
-                <h3 class="card-title"><?php echo $lang["admin_orders_title"]; ?></h3>
+                <h3 class="card-title"><?php echo $lang["admin_orders_title"]; ?> <?php if (isset($_GET["id"])){ ?>[Id: <?php echo $_GET["id"]; ?>]<?php }; ?></h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <form method="post" action="?d=<?php echo $_GET["d"]; ?>&do=<?php echo $_GET["do"]; ?>">
                   <input type="hidden" name="action" value="save" />
                   <?php if (isset($_GET["id"])){ ?><input type="hidden" name="id" value="<?php echo $_GET["id"];?>" /><?php }; ?>
-                  <input type="hidden" name="products_json" value="<?php echo $row["products_json"];?>" />
+                  <input type="hidden" name="products_json" value='<?php echo $row["products_json"];?>' />
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
@@ -281,9 +281,9 @@ if (!isset($_GET["do"])){
                       <span class="sr-only"><?php echo $lang["options"]; ?></span>
                     </button>
                     <div class="dropdown-menu" role="menu" style="">
-                      <a class="dropdown-item" href="?d=<?php echo $_GET["d"]; ?>&do=update&id=<?php echo $row["id"];?>"><i class="far fa fa-edit nav-icon"></i> <?php echo $lang["update"]; ?></a>
+                      <a class="dropdown-item" href="?d=orders&do=update&id=<?php echo $row["id"];?>"><i class="far fa fa-edit nav-icon"></i> <?php echo $lang["update"]; ?></a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item remove" href="?d=<?php echo $_GET["d"]; ?>&do=remove&id=<?php echo $row["id"];?>" ><i class="far fa fa-trash-alt nav-icon"></i> <?php echo $lang["remove"]; ?></a>
+                      <a class="dropdown-item remove" href="?d=orders&do=remove&id=<?php echo $row["id"];?>" ><i class="far fa fa-trash-alt nav-icon"></i> <?php echo $lang["remove"]; ?></a>
                     </div>
                   </div>
 

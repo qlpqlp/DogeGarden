@@ -213,7 +213,7 @@ if (!isset($_GET["do"])){
                     </td>
                     <td><?php echo $row["title"];?></td>
                     <td>
-                      <?php if ($row["img"] != ""){ ?><img src="../fl/<?php echo $row["img"];?>" style="max-width: 200px"><?php }; ?>
+                      <?php if ($row["img"] != ""){ ?><img src="../fl/<?php echo $row["img"];?>" style="max-width: 50px"><?php }; ?>
                     </td>
                     <td><?php echo $row["ord"];?></td>
                     <td>

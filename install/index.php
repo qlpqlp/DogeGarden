@@ -131,7 +131,7 @@ include("../inc/config.php");
 
 <div class="callout callout-warning">
     <p>Now you have to PortFoward on your router the ports 22555, 22556, 44555, 44556 follow this exemple here <a href="https://dogecoinisawesome.com/full-node#enabling-connections" target="_blank" style="color: #DFA800; text-decoration: none">dogecoinisawesome.com</a>.
-    <br>Note: Some Web Hosting companies dont allow connections to Dogecoin ports, if so add an extra port foward from internal 22555 to external 3306 (the port 3306 is comon use because of the MySQL/MariaDB connections)
+    <br>Note: Some Web Hosting companies dont allow connections to Dogecoin ports, if so add an extra port foward from internal 22555 to external 3306 or the port 80 if the 3306 is blocked on your Internet Service Provider
     </p>
 </div>
 <br>
@@ -260,7 +260,10 @@ include("../inc/config.php");
               </div>
               <div id="test-l-3" class="content">
 <div class="callout callout-warning">
-    <p>Now, you have to import the database dogegarden.sql into your hosting/server using for exemple phpMYAdmin!</p>
+    <p>Now, you have to import the database dogegarden.sql into your hosting/server using for exemple <b>phpMYAdmin</b>!</p>
+</div>
+<div class="callout callout-warning">
+    <p>Add an <b>CRON</b> job running in every minute, and point to <b>inc/cron.php</b></p>
 </div>
 <div class="callout callout-warning">
     <p>To test if your Dogecoin Core Node is runnning correctly and connected to your DogeGarden Online Store, <a id="node" href="#" style="color: #DFA800; text-decoration: none">click here</a> ! <span id="noderesults"></span></p>
