@@ -15,7 +15,7 @@ DogeGarden
 
 ## How to Update 💻
 
-1- Backup or existent copy of DogeGarden Files and MySql/MariaDB database ```(Always Backup its most crucial step of all)```
+1- Backup all files from your DogeGarden online store and also make an backup of the MySql/MariaDB database ```(Always Backup its most crucial step of all)```
 
 2- Download and extract the files from GitHub.
 
