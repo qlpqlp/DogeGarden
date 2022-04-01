@@ -253,7 +253,11 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
                               $dbm = $pdo->query("SELECT id FROM categories where id = '".$d->CleanString($_GET["c"])."' and id_cat = '".$row["id"]."' and lang = '".$_SESSION["l"]."' and active = 1 limit 1")->fetch();
                               if ($dbm["id"] > 0){
                                 $active = "active";
-                              };
+                              }else{
+                                if ($d->CleanString($_GET["c"]) == $row["id"]){
+                                  $active = "active";
+                                };
+                              }
                             };
                         };
 
