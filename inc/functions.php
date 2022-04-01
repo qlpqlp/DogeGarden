@@ -22,7 +22,7 @@
       $pdo = new PDO($db, $config["dbuser"], $config["dbpass"], $opt);
       }
     catch (PDOException $e) {
-     if(isset($config["rpcuser"]) and $config["rpcuser"] != "" ){ echo '<br>DB Error: ' . $e->getMessage() . '<br><br>'; echo '<br>This page will auto refresh in 5 seconds to check if the issue is resolved!'; header("Refresh:5"); exit();};
+      if(isset($config["rpcuser"]) and $config["rpcuser"] != "" ){ /*echo '<br>DB Error: ' . $e->getMessage() . '<br><br>';*/ echo '<div style="top: 50%;;left: 50%; position: absolute;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);font-family: Comic Sans MS;word-break: break-all;max-width:416px"><img src="img/sad_doge.gif"><br>Sorry Shibe, there is an temporary problem and we are working on it! I will try to check in 5 seconds.</div>'; header("Refresh:5"); exit();};
      };
 
 

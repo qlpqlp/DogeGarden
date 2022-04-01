@@ -43,6 +43,9 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
     .container, .container-fluid, .container-sm, .container-md, .container-lg, .container-xl {
         padding-top: 20px;
     }
+    .preloader{
+      background-color: rgba(244, 246, 249, 0.8);
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
@@ -700,6 +703,10 @@ function removecart(id) {
                   });
 
 };
+  // prevent resubmiting page
+  if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+  }
 </script>
 </body>
 </html>

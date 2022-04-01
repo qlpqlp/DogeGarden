@@ -89,6 +89,7 @@ if (isset($_GET["insert"])){
         $db = $pdo->query("SELECT id,doge FROM shipping where weight <= '".$cartweight."' order by weight ASC limit 1")->fetch();
     }
     if (!isset($db["doge"])){ $db["doge"] = 0; };
+    if ($cartweight == 0 ){ $db["doge"] = 0; };  // offer free shipping if weight is zero
 ?>
     <table cellspacing="1" class="table table-striped table-sm table-dark" style="width:100%;">
     <tbody>

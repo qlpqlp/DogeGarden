@@ -91,6 +91,7 @@ exit();
     };
 
     if (!isset($shipping["doge"])){ $shipping["doge"] = 0; };
+    if ($cartweight == 0 ){ $shipping["doge"] = 0; };  // offer free shipping if weight is zero
 
       $total_doge = number_format((float)(($carttotal + $shipping["doge"])), 8, '.', '');
 
