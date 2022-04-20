@@ -1,6 +1,13 @@
                   <?php
                       $row = $pdo->query("SELECT * FROM products where id = '".$_GET["product"]."' limit 1")->fetch();
                       $rowc = $pdo->query("SELECT * FROM categories where id = '".$row["id_cat"]."' limit 1")->fetch();
+                          // we get the TAX for that product
+                         $rowt["tax"] = 0; // we set default to zero
+                         if (isset($_SESSION["country"])){ // we check if Shibe is logged in and we get only shipping from all countries or his own country
+                            $rowt = $pdo->query("SELECT * FROM tax where category = '".$row["cat_tax"]."' and country = '".$_SESSION["country"]."' limit 1")->fetch();
+                         }else{
+                            $rowt = $pdo->query("SELECT * FROM tax where category = '".$row["cat_tax"]."' limit 1")->fetch();
+                         }
                   ?>
    <!-- Default box -->
       <div class="card card-solid">
@@ -106,7 +113,7 @@
                           </div>
               <div class="bg-gray py-2 px-3 mt-4">
                 <h2 class="mb-0">
-                  Ð <?php echo number_format((float)($row["doge"] + ($row["doge"] * $row["tax"] / 100)), 8, '.', ''); ?>
+                  Ð <?php echo number_format((float)($row["doge"] + ($row["doge"] * $rowt["tax"] / 100)), 8, '.', ''); ?>
                 </h2>
                 <h4 class="mt-0">
                   <small>Ex Tax: Ð <?php echo $row["doge"]; ?> </small>

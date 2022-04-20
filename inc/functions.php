@@ -249,12 +249,12 @@ class DogeBridge {
 
 //// Products /////////
   // Add Product
-  public function InsertProduct($id_cat,$tax,$doge,$fiat,$moon_new,$moon_full,$qty,$weight,$highlighted,$title,$text,$imgs,$ord,$date,$active)
+  public function InsertProduct($id_cat,$cat_tax,$doge,$fiat,$moon_new,$moon_full,$qty,$weight,$highlighted,$title,$text,$imgs,$ord,$date,$active)
     {
 
      $this->pdo->query("INSERT INTO `products` (
       `id_cat`,
-      `tax`,
+      `cat_tax`,
       `doge`,
       `fiat`,
       `moon_new`,
@@ -270,7 +270,7 @@ class DogeBridge {
       `active`
       ) VALUES (
       '".$id_cat."',
-      '".$tax."',
+      '".filter_var($cat_tax, FILTER_SANITIZE_MAGIC_QUOTES)."',
       '".$doge."',
       '".$fiat."',
       '".$moon_new."',
@@ -290,12 +290,12 @@ class DogeBridge {
     }
 
   // update an existent Product
-  public function UpdateProduct($id_cat,$tax,$doge,$fiat,$moon_new,$moon_full,$qty,$weight,$highlighted,$title,$text,$imgs,$ord,$date,$active,$id)
+  public function UpdateProduct($id_cat,$cat_tax,$doge,$fiat,$moon_new,$moon_full,$qty,$weight,$highlighted,$title,$text,$imgs,$ord,$date,$active,$id)
     {
 
       $this->pdo->query("UPDATE products SET
       id_cat = '".$id_cat."',
-      tax = '".$tax."',
+      cat_tax = '".filter_var($cat_tax, FILTER_SANITIZE_MAGIC_QUOTES)."',
       doge = '".$doge."',
       fiat = '".$fiat."',
       moon_new = '".$moon_new."',
@@ -496,6 +496,50 @@ class DogeBridge {
     }
 //// END shipping /////////
 
+
+//// tax /////////
+  // Add tax
+  public function InsertTax($category,$country,$tax,$active)
+    {
+
+      $this->pdo->query("INSERT INTO `tax` (
+      `category`,
+      `country`,
+      `tax`,
+      `active`
+      ) VALUES (
+      '".filter_var($category, FILTER_SANITIZE_MAGIC_QUOTES)."',
+      '".$country."',
+      '".$tax."',
+      '".$active."'
+      );");
+
+      return null;
+    }
+
+  // update an existent shipping
+  public function UpdateTax($category,$country,$tax,$active,$id)
+    {
+
+      $this->pdo->query("UPDATE tax SET
+      category = '".filter_var($category, FILTER_SANITIZE_MAGIC_QUOTES)."',
+      country = '".$country."',
+      tax = '".$tax."',
+      active = '".$active."'
+      WHERE id = '".$id."' limit 1");
+
+      return null;
+    }
+
+  // Reemoves tax
+  public function RemoveTax($id)
+    {
+
+      $this->pdo->query("DELETE FROM tax where id='".$id."' limit 1");
+
+      return null;
+    }
+//// END tax /////////
 
 
 //// orders /////////

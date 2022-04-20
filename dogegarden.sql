@@ -97,7 +97,7 @@ CREATE TABLE `pages` (
 CREATE TABLE `products` (
   `id` bigint(20) NOT NULL,
   `id_cat` bigint(20) NOT NULL,
-  `tax` decimal(10,4) NOT NULL,
+  `cat_tax` varchar(255) DEFAULT '0',
   `doge` decimal(20,8) NOT NULL,
   `fiat` decimal(20,8) NOT NULL,
   `moon_new` decimal(10,2) DEFAULT '0.00',
@@ -149,6 +149,18 @@ CREATE TABLE `shipping` (
   `weight` decimal(10,2) DEFAULT NULL,
   `doge` decimal(20,8) DEFAULT NULL,
   `fiat` decimal(20,8) NOT NULL,
+  `active` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Table structure for table `tax`
+--
+
+CREATE TABLE `tax` (
+  `id` bigint(20) NOT NULL,
+  `category` varchar(255) DEFAULT NULL,
+  `country` varchar(2) NOT NULL DEFAULT 'en',
+  `tax` decimal(10,4) NOT NULL,
   `active` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -28,10 +28,10 @@ if(isset($_POST["action"])){
     };
 
     if ( $_GET["do"] == "insert"){
-        $d->InsertProduct($_POST["id_cat"],$_POST["tax"],$_POST["doge"],$_POST["fiat"],$_POST["moon_new"],$_POST["moon_full"],$_POST["qty"],$_POST["weight"],$_POST["highlighted"],$_POST["title"],$_POST["text"],$_POST["imgs"],$_POST["ord"],date('Y-m-d H:i:s'),$_POST["active"]);
+        $d->InsertProduct($_POST["id_cat"],$_POST["cat_tax"],$_POST["doge"],$_POST["fiat"],$_POST["moon_new"],$_POST["moon_full"],$_POST["qty"],$_POST["weight"],$_POST["highlighted"],$_POST["title"],$_POST["text"],$_POST["imgs"],$_POST["ord"],date('Y-m-d H:i:s'),$_POST["active"]);
     }
     if ( $_GET["do"] == "update"){
-        $d->UpdateProduct($_POST["id_cat"],$_POST["tax"],$_POST["doge"],$_POST["fiat"],$_POST["moon_new"],$_POST["moon_full"],$_POST["qty"],$_POST["weight"],$_POST["highlighted"],$_POST["title"],$_POST["text"],$_POST["imgs"],$_POST["ord"],date('Y-m-d H:i:s'),$_POST["active"],$_POST["id"]);
+        $d->UpdateProduct($_POST["id_cat"],$_POST["cat_tax"],$_POST["doge"],$_POST["fiat"],$_POST["moon_new"],$_POST["moon_full"],$_POST["qty"],$_POST["weight"],$_POST["highlighted"],$_POST["title"],$_POST["text"],$_POST["imgs"],$_POST["ord"],date('Y-m-d H:i:s'),$_POST["active"],$_POST["id"]);
     };
     $_GET["id"] = null; $_GET["do"] = null; $_GET["action"] = null;
 };
@@ -119,7 +119,28 @@ if(isset($_POST["action"])){
                     <div class="col-sm-4">
                       <div class="form-group">
                         <label><?php echo $lang["tax"]; ?> %</label>
-                        <input type="number" step="any" name="tax" class="form-control" min="0" value="<?php if (isset($row["tax"])){ echo $row["tax"]; }else{ echo "0"; }; ?>" placeholder="0">
+                        <select class="form-control" name="cat_tax" required="required">
+                        <?php
+                            $dbsub = $pdo->query("SELECT DISTINCT category FROM tax order by category ASC");
+                            while ($rowsub = $dbsub->fetch()) {
+                        ?>
+                                <option value="<?php echo $rowsub["category"];?>" ><?php echo $rowsub["category"];?></option>
+                        <?php
+                        };
+                        ?>
+                        <?php
+                        if (isset($row["cat_tax"])){
+                        ?>
+                                <option value="<?php echo $row["cat_tax"];?>" selected="selected" ><?php echo $row["cat_tax"];?></option>
+                        <?php
+                        }else{
+                          ?>
+                                <option value="" selected="selected" >---</option>
+                          <?php
+                        }
+                        ?>
+                                <option value="" >0</option>                        
+                        </select>
                       </div>
                     </div>
                     <div class="col-sm-4">
@@ -270,7 +291,7 @@ if (!isset($_GET["do"])){
                     <td><?php echo $row["title"];?></td>
                     <td>Ð <?php echo $row["doge"];?></td>
                     <td><?php echo $row["fiat"];?></td>
-                    <td><?php echo $row["tax"];?></td>
+                    <td><?php echo $row["cat_tax"];?></td>
                     <td><?php echo $row["moon_new"];?></td>
                     <td><?php echo $row["moon_full"];?></td>
                     <td><?php echo $row["qty"];?></td>

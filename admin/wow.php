@@ -45,7 +45,7 @@ if (!isset($_SESSION["admin"])){
     }
   </style>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center" style="margin-top: -20px;">
@@ -225,6 +225,14 @@ if (!isset($_SESSION["admin"])){
                 </a>
               </li>
             </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="?d=tax" class="nav-link <?php if ($_GET["d"] == "tax"){ ?>active<?php }; ?>">
+                  <i class="far fas fa-percent nav-icon"></i>
+                  <p><?php echo $lang["tax"]; ?></p>
+                </a>
+              </li>
+            </ul>
           </li>
 
 
@@ -354,6 +362,15 @@ if (!isset($_SESSION["admin"])){
   if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
   }
+<?php
+if (isset($_GET["d"]) and $_GET["d"] == "pos"){
+?>
+$(document).ready(function(){
+    $("body").addClass("sidebar-collapse");
+});
+<?php
+};
+?>
 </script>
 </body>
 </html>

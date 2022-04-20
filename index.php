@@ -48,7 +48,7 @@ if(isset($_SESSION["shibe"]) and $_SESSION["shibe"] > 0){
     }
   </style>
 </head>
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 
 <div class="wrapper">
 

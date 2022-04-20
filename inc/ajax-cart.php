@@ -63,6 +63,15 @@ if (isset($_GET["insert"])){
                         if ($moon != ""){ $cartmoon = $cartmoon + ($product["doge"] / 100) * $product[$moon]; $product["doge"] = ($product["doge"] / 100) * $product[$moon]; };
 
 
+                          // we get the TAX for that product
+                         $rowt["tax"] = 0; // we set default to zero
+                         if (isset($_SESSION["country"])){ // we check if Shibe is logged in and we get only shipping from all countries or his own country
+                            $rowt = $pdo->query("SELECT * FROM tax where category = '".$product["cat_tax"]."' and country = '".$_SESSION["country"]."' limit 1")->fetch();
+                         }else{
+                            $rowt = $pdo->query("SELECT * FROM tax where category = '".$product["cat_tax"]."' limit 1")->fetch();
+                         }
+
+                       $product["tax"] = $rowt["tax"];
                        $product["doge"] = $product["doge"] * $row["qty"]; // we calculate the amount of Doge to pay for each product
                        $cartqty = $cartqty + $row["qty"]; // we calculate the product qty
                        $carttax = (number_format((float)($product["doge"] + ($product["doge"] * $product["tax"] / 100)), 8, '.', '') - $product["doge"]);  // we calculate the product tax
@@ -83,7 +92,7 @@ if (isset($_GET["insert"])){
 ?>
     </table>
 <?php if ($cartqty > 0){ // if cart not empty
-    if (isset($_SESSION["country"])){ // we checj if Shibe is logged in and we get only shipping from all countries or his own country
+    if (isset($_SESSION["country"])){ // we check if Shibe is logged in and we get only shipping from all countries or his own country
         $db = $pdo->query("SELECT id,doge,country FROM shipping where weight >= '".$cartweight."' and (country = '' or country = '".$_SESSION["country"]."') order by weight ASC limit 1")->fetch();
     }else{
         $db = $pdo->query("SELECT id,doge FROM shipping where weight <= '".$cartweight."' order by weight ASC limit 1")->fetch();
