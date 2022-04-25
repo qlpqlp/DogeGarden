@@ -91,7 +91,7 @@ $lang["description"] = "Description";
 
 $lang["muchincart"] = "Wow ! Le panier ";
 $lang["tax"] = "Taxe";
-$lang["doge"] = "prix Doge";
+$lang["doge"] = "Prix (Doge)";
 $lang["discount"] = "Discount %";
 $lang["qty"] = "Qté";
 $lang["highlighted"] = "Promotion";
@@ -145,7 +145,7 @@ $lang["products_json"] = "Produits JSON";
 $lang["pending"] = "En attente";
 $lang["sended"] = "Expédié";
 $lang["finish"] = "Terminé";
-$lang["cancel"] = "Annulée";
+$lang["cancel"] = "Annuler";
 $lang["refunded"] = "Remboursé";
 
 // Used Globally
