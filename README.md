@@ -1,7 +1,7 @@
 <h1 align="center">
 DogeGarden
 <br><br>
-<img src="https://dogegarden.io/img/dogeGarden.png" alt="DogeGarden the first OpenSource Online Store connected to the Dogecoin BlockChain"/>
+<img src="https://dogegarden.com/img/dogeGarden.png" alt="DogeGarden the first OpenSource Online Store connected to the Dogecoin BlockChain"/>
 <br><br>
 </h1>
 
